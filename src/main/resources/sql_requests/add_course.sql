@@ -1,0 +1,2 @@
+INSERT INTO `hogwarts_courses`.`courses` (`id_professor`, `name`, `rating`, `complexity`, `creation_date`, `id_course_status`, `description`, `conclusion`)
+VALUES ('7', 'Курс', '0', '4', '2021-06-12', '1', 'Курс', 'Ну ок');
