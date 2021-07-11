@@ -21,6 +21,10 @@ class ConnectionFactory {
     static {
         String driverName = null;
         try (InputStream inputStream = ConnectionFactory.class.getClassLoader().getResourceAsStream(RESOURCE)) {
+            if (inputStream == null) {
+                logger.fatal("Can't find property file by name: " + RESOURCE);
+                throw new RuntimeException("fatal: can't find property file by name: " + RESOURCE);
+            }
             properties.load(inputStream);
             driverName = (String) properties.get(DB_DRIVER);
             Class.forName(driverName);
@@ -34,8 +38,7 @@ class ConnectionFactory {
         DATABASE_URL = (String) properties.get(DB_URL);
     }
 
-    private ConnectionFactory() {
-    }
+    private ConnectionFactory() {    }
 
     static Connection createConnection() throws SQLException {
         return DriverManager.getConnection(DATABASE_URL, properties);
