@@ -40,13 +40,13 @@ public class ColumnName {
 
     /* rating table */
     public static final String RATING_ID = "id_rate";
-    public static final String RATING_NAME = "name";
+    public static final String RATING_NAME = "rating_name";
     public static final String RATING_LOWER_BOUND = "lower_bound";
     public static final String RATING_UPPER_BOUND = "upper_bound";
 
     /* roles table */
     public static final String ROLE_ID = "id_role";
-    public static final String ROLE_NAME = "id_name";
+    public static final String ROLE_NAME = "role_name";
 
     /* theory table */
     public static final String THEORY_ID = "id_theory";

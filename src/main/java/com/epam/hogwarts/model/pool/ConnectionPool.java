@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
-    private static Logger logger = LogManager.getLogger(ConnectionPool.class);
+    private static final Logger logger = LogManager.getLogger(ConnectionPool.class);
     private static final int DEFAULT_POOL_SIZE = 8;
     private static ConnectionPool instance;
     private static ReentrantLock lock = new ReentrantLock();
@@ -86,7 +86,6 @@ public class ConnectionPool {
         }
         deregisterDrivers();
     }
-
 
     private void deregisterDrivers() {
         Enumeration<Driver> drivers = DriverManager.getDrivers();

@@ -1,23 +1,25 @@
 package com.epam.hogwarts.entity;
 
-import java.sql.Blob;
+import java.util.Arrays;
 
 public class User extends AbstractEntity {
 
-    //todo: we don't need setters if we use builder, aren't we??
     //todo: can we describe fields as final to guarantee immutability??
     private final String login;
+    private final String password;
     private final UserRole role;
     private final String rating;
     private final String name;
     private final String surname;
     private final String email;
-    private final Blob avatar;
+    private final byte[] avatar;
     private final String about;
+    private double ratingDouble;
 
     private User(Builder builder) {
         super(builder.userId);
         this.login = builder.login;
+        this.password = builder.password;
         this.role = builder.role;
         this.rating = builder.rating;
         this.name = builder.name;
@@ -29,6 +31,10 @@ public class User extends AbstractEntity {
 
     public String getLogin() {
         return login;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public UserRole getRole() {
@@ -51,12 +57,20 @@ public class User extends AbstractEntity {
         return email;
     }
 
-    public Blob getAvatar() {
+    public byte[] getAvatar() {
         return avatar;
     }
 
     public String getAbout() {
         return about;
+    }
+
+    public double getRatingDouble() {
+        return ratingDouble;
+    }
+
+    public void setRatingDouble(double ratingDouble) {
+        this.ratingDouble = ratingDouble;
     }
 
     @Override
@@ -65,25 +79,27 @@ public class User extends AbstractEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         User user = (User) o;
-        return rating.equals(user.rating) &&
-                login.equals(user.login) &&
-                role == user.role &&
-                name.equals(user.name) &&
-                surname.equals(user.surname) &&
-                email.equals(user.email) &&
-                avatar.equals(user.avatar) && about.equals(user.about);
+        return login.equals(user.login)
+                && password == user.password
+                && role == user.role
+                && rating.equals(user.rating)
+                && name.equals(user.name)
+                && surname.equals(user.surname)
+                && email.equals(user.email)
+                && Arrays.equals(avatar, user.avatar)
+                && about.equals(user.about);
     }
 
     @Override
     public int hashCode() {
-        int result = login == null ? 0 : login.hashCode();
-        result += 31 * result + role.hashCode();
+        int result = login.hashCode();
+        result += 31 * result + password.hashCode();
         result += 31 * result + role.hashCode();
         result += 31 * result + rating.hashCode();
         result += 31 * result + name.hashCode();
         result += 31 * result + surname.hashCode();
         result += 31 * result + email.hashCode();
-        result += 31 * result + avatar.hashCode();
+        result += 31 * result + Arrays.hashCode(avatar);
         result += 31 * result + about.hashCode();
         return result;
     }
@@ -91,12 +107,13 @@ public class User extends AbstractEntity {
     public static class Builder {
         private long userId;
         private String login;
+        private String password;
         private UserRole role;
         private String rating;
         private String name;
         private String surname;
         private String email;
-        private Blob avatar;
+        private byte[] avatar;
         private String about;
 
         public Builder setUserId(Long userId) { //todo do we need to build userId?? (it should be created by sql)
@@ -106,6 +123,11 @@ public class User extends AbstractEntity {
 
         public Builder setLogin(String login) {
             this.login = login;
+            return this;
+        }
+
+        public Builder setPassword(String password) {
+            this.password = password;
             return this;
         }
 
@@ -134,7 +156,7 @@ public class User extends AbstractEntity {
             return this;
         }
 
-        public Builder setAvatar(Blob avatar) {
+        public Builder setAvatar(byte[] avatar) {
             this.avatar = avatar;
             return this;
         }

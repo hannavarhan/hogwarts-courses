@@ -9,40 +9,63 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class JdbcTemplate<T extends AbstractEntity> {
 
     private ConnectionPool connectionPool;
-    private RowMapper<T> rowMapper;
 
-    public JdbcTemplate(ConnectionPool connectionPool, RowMapper<T> rowMapper) {
+    public JdbcTemplate(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
-        this.rowMapper = rowMapper;
     }
 
-    public Optional<T> query(String sql, Object... objects) throws DaoException {
-        Optional<T> t;
+    public Optional<T> query(String sql, RowMapper<T> rowMapper, Object... objects) throws DaoException {
+        Optional<T> result;
+        try (Connection connection = connectionPool.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)) {
+            setObjectsToStatement(statement, objects);
+            ResultSet resultSet = statement.executeQuery();
+            result = Optional.of(rowMapper.mapRow(resultSet));
+        } catch (SQLException e) {
+            throw new DaoException("Can't handle UserDao.query request", e);
+        }
+        return result;
+    }
+
+    public List<T> queryForList(String sql, RowMapper<T> rowMapper, Object... objects) throws DaoException {
+        List<T> result = new ArrayList<>();
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            for (int i = 0; i < objects.length; i++) {
-                statement.setObject(i, objects[i]);
-            }
+            setObjectsToStatement(statement, objects);
             ResultSet resultSet = statement.executeQuery();
-            t = Optional.of(rowMapper.mapRow(resultSet));
+            while (resultSet.next()) {
+                T entity = rowMapper.mapRow(resultSet);
+                result.add(entity);
+            }
         } catch (SQLException e) {
-            throw new DaoException("Can't handle UserDao.findUserByEmail request", e);
+            throw new DaoException("Can't handle UserDao.queryForList request", e);
         }
-        return t;
+        return result;
     }
 
-    public List<T> queryForList(String sql, Object... objects) {
-        return null;
+    public int update(String sql, Object... objects) throws DaoException {
+        int result;
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            setObjectsToStatement(statement, objects);
+            result = statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException("Can't handle UserDao.update request", e);
+        }
+        return result;
     }
 
-    public int update(String sql, Object... objects) {
-        return 0;
+    private void setObjectsToStatement(PreparedStatement statement, Object... objects) throws SQLException {
+        for (int i = 0; i < objects.length; i++) {
+            statement.setObject(i, objects[i]);
+        }
     }
 
 }

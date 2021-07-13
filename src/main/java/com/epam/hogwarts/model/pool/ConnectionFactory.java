@@ -1,5 +1,6 @@
 package com.epam.hogwarts.model.pool;
 
+import com.epam.hogwarts.entity.UserRole;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 class ConnectionFactory {
-    private static Logger logger = LogManager.getLogger(ConnectionFactory.class);
+    private static final Logger logger = LogManager.getLogger(ConnectionFactory.class);
     private static final Properties properties = new Properties();
     private static final String DATABASE_URL;
     private static final String DB_URL = "db.url";
