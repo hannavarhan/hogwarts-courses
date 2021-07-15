@@ -20,7 +20,7 @@ public class ColumnName {
     public static final String COURSE_RATING = "rating";
     public static final String COURSE_COMPLEXITY = "complexity";
     public static final String COURSE_CREATION_DATE = "creation_date";
-    public static final String COURSE_STATUS_ID = "id_course_status";
+    public static final String COURSE_IS_ACTUAL = "is_actual";
     public static final String COURSE_DESCRIPTION = "description";
     public static final String COURSE_CONCLUSION = "conclusion";
     public static final String COURSE_ICON = "icon";

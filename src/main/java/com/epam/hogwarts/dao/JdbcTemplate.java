@@ -22,12 +22,14 @@ public class JdbcTemplate<T extends AbstractEntity> {
     }
 
     public Optional<T> query(String sql, RowMapper<T> rowMapper, Object... objects) throws DaoException {
-        Optional<T> result;
+        Optional<T> result = Optional.empty();
         try (Connection connection = connectionPool.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             setObjectsToStatement(statement, objects);
             ResultSet resultSet = statement.executeQuery();
-            result = Optional.of(rowMapper.mapRow(resultSet));
+            while (resultSet.next()) {
+                result = Optional.of(rowMapper.mapRow(resultSet));
+            }
         } catch (SQLException e) {
             throw new DaoException("Can't handle UserDao.query request", e);
         }
@@ -64,7 +66,7 @@ public class JdbcTemplate<T extends AbstractEntity> {
 
     private void setObjectsToStatement(PreparedStatement statement, Object... objects) throws SQLException {
         for (int i = 0; i < objects.length; i++) {
-            statement.setObject(i, objects[i]);
+            statement.setObject(i+1, objects[i]);
         }
     }
 

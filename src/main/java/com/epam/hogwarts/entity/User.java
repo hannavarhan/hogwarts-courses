@@ -84,23 +84,18 @@ public class User extends AbstractEntity {
                 && role == user.role
                 && rating.equals(user.rating)
                 && name.equals(user.name)
-                && surname.equals(user.surname)
-                && email.equals(user.email)
-                && Arrays.equals(avatar, user.avatar)
-                && about.equals(user.about);
+                && surname.equals(user.surname);
     }
 
     @Override
     public int hashCode() {
-        int result = login.hashCode();
+        int result = (int) getEntityId();
+        result += 31 * result + login.hashCode();
         result += 31 * result + password.hashCode();
         result += 31 * result + role.hashCode();
         result += 31 * result + rating.hashCode();
         result += 31 * result + name.hashCode();
         result += 31 * result + surname.hashCode();
-        result += 31 * result + email.hashCode();
-        result += 31 * result + Arrays.hashCode(avatar);
-        result += 31 * result + about.hashCode();
         return result;
     }
 

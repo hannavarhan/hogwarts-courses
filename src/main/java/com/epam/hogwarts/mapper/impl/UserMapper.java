@@ -16,6 +16,7 @@ public class UserMapper implements RowMapper<User> {
         User user = new User.Builder()
                 .setUserId(resultSet.getLong(USER_ID))
                 .setLogin(resultSet.getString(USER_LOGIN))
+                .setPassword(resultSet.getString(USER_PASSWORD))
                 .setRole(UserRole.valueOf(resultSet.getString(ROLE_NAME).toUpperCase()))
                 .setRating(resultSet.getString(RATING_NAME))
                 .setName(resultSet.getString(USER_NAME))

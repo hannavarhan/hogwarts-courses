@@ -13,45 +13,45 @@ import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
 
-    private JdbcTemplate<User> jdbcTemplate;
-
     private static final String SQL_SELECT_USERS_BY_ROLE = "SELECT id_user, login, password, role_name, rating_name, " +
-            "users.name, surname, email, avatar, about \n" +
-            "FROM users\n" +
-            "JOIN roles ON roles.id_role = users.id_role\n" +
-            "JOIN rating ON users.rating IN (rating.lower_bound, rating.upper_bound)\n" +
+            "users.name, surname, email, avatar, about " +
+            "FROM users " +
+            "JOIN roles ON roles.id_role = users.id_role " +
+            "JOIN rating ON users.rating IN (rating.lower_bound, rating.upper_bound) " +
             "WHERE roles.name = ?;";
 
     private static final String SQL_SELECT_USER_BY_LOGIN = "SELECT id_user, login, password, role_name, rating_name, " +
-            "users.name, surname, email, avatar, about \n" +
-            "FROM users\n" +
-            "JOIN roles ON roles.id_role = users.id_role\n" +
-            "JOIN rating ON users.rating IN (rating.lower_bound, rating.upper_bound)\n" +
+            "users.name, surname, email, avatar, about " +
+            "FROM users " +
+            "JOIN roles ON roles.id_role = users.id_role " +
+            "JOIN rating ON users.rating IN (rating.lower_bound, rating.upper_bound) " +
             "WHERE login = ?;";
 
     private static final String SQL_SELECT_USER_BY_ID = "SELECT id_user, login, password, role_name, rating_name, " +
-            "users.name, surname, email, avatar, about \n" +
-            "FROM users\n" +
-            "JOIN roles ON roles.id_role = users.id_role\n" +
-            "JOIN rating ON users.rating IN (rating.lower_bound, rating.upper_bound)\n" +
+            "users.name, surname, email, avatar, about " +
+            "FROM users " +
+            "JOIN roles ON roles.id_role = users.id_role " +
+            "JOIN rating ON users.rating IN (rating.lower_bound, rating.upper_bound) " +
             "WHERE id_user = ?;";
 
     private static final String SQL_INSERT_USER = "INSERT INTO users (login, password, id_role, rating, " +
-            "users.name, surname, email, avatar, about)\n" +
-            "VALUES(?, ?, \n" +
-            "(SELECT id_role FROM roles WHERE role_name=?), \n" +
+            "users.name, surname, email, avatar, about) " +
+            "VALUES(?, ?,  " +
+            "(SELECT id_role FROM roles WHERE role_name=?),  " +
             "?, ?, ?, ?, ?, ?);";
 
-    private static final String SQL_UPDATE_USER = "UPDATE users \n" +
-            "SET password=?,\n" +
-            "id_role=(SELECT id_role FROM roles WHERE role_name=?),\n" +
-            "rating=?,\n" +
-            "users.name=?,\n" +
-            "surname=?,\n" +
-            "email=?,\n" +
-            "avatar=?,\n" +
-            "about=?\n" +
+    private static final String SQL_UPDATE_USER = "UPDATE users  " +
+            "SET password=?, " +
+            "id_role=(SELECT id_role FROM roles WHERE role_name=?), " +
+            "rating=?, " +
+            "users.name=?, " +
+            "surname=?, " +
+            "email=?, " +
+            "avatar=?, " +
+            "about=? " +
             "WHERE id_user=?;";
+
+    private JdbcTemplate<User> jdbcTemplate;
 
     public UserDaoImpl() {
         jdbcTemplate = new JdbcTemplate<>(ConnectionPool.getInstance());
