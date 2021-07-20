@@ -25,6 +25,12 @@ public class ColumnName {
     public static final String COURSE_CONCLUSION = "conclusion";
     public static final String COURSE_ICON = "icon";
 
+    /* answers table */
+    public static final String ANSWER_ID = "id_answer";
+    public static final String ANSWER_QUESTION_ID = "id_question";
+    public static final String ANSWER_TEXT = "answer";
+    public static final String ANSWER_IS_CORRECT = "is_correct";
+
     /* feedback table */
     public static final String FEEDBACK_ID = "id";
     public static final String FEEDBACK_COMMENT = "comment";

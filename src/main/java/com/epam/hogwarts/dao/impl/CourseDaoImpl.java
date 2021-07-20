@@ -1,6 +1,5 @@
 package com.epam.hogwarts.dao.impl;
 
-import com.epam.hogwarts.dao.BaseDao;
 import com.epam.hogwarts.dao.CourseDao;
 import com.epam.hogwarts.dao.JdbcTemplate;
 import com.epam.hogwarts.entity.Course;
@@ -13,11 +12,40 @@ import java.util.Optional;
 
 public class CourseDaoImpl implements CourseDao {
 
-    private static final String SQL_SELECT_COURSE_BY_ID = "SELECT id_course, id_professor, " +
+    private static final String SQL_SELECT_COURSE_BY_ID = "SELECT id_course, id_professor, courses.name, " +
             "courses.rating, complexity, creation_date, " +
             "is_actual, description, conclusion, icon " +
             "FROM hogwarts_courses.courses " +
             "WHERE id_course=?;";
+
+    private static final String SQL_INSERT_COURSE = "INSERT INTO hogwarts_courses.courses " +
+            "(id_professor, name, courses.rating, complexity, creation_date, " +
+            "is_actual, description, conclusion, icon) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
+    private static final String SQL_UPDATE_COURSE = "UPDATE hogwarts_courses.courses SET " +
+            "id_professor=?, " +
+            "name=?, " +
+            "courses.rating=?, " +
+            "complexity=?, " +
+            "creation_date=?, " +
+            "is_actual=?, " +
+            "description=?, " +
+            "conclusion=?, " +
+            "icon=? " +
+            "WHERE id_course=?;";
+
+    private static final String SQL_SELECT_COURSES_BY_ACTUAL = "SELECT id_course, id_professor, courses.name, " +
+            "courses.rating, complexity, creation_date, " +
+            "is_actual, description, conclusion, icon " +
+            "FROM hogwarts_courses.courses " +
+            "WHERE is_actual=?;";
+
+    private static final String SQL_SELECT_COURSES_BY_PROFESSOR = "SELECT id_course, id_professor, courses.name, " +
+            "courses.rating, complexity, creation_date, " +
+            "is_actual, description, conclusion, icon " +
+            "FROM hogwarts_courses.courses " +
+            "WHERE id_professor=?;";
 
     private JdbcTemplate<Course> jdbcTemplate;
 
@@ -27,27 +55,54 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public Optional<Course> findById(Long id) throws DaoException {
-        Optional<Course> result = jdbcTemplate.query(SQL_SELECT_COURSE_BY_ID, new CourseMapper());
+        Optional<Course> result = jdbcTemplate.query(SQL_SELECT_COURSE_BY_ID, new CourseMapper(), id);
         return result;
     }
 
     @Override
     public Optional<Course> insert(Course entity) throws DaoException {
-        return Optional.empty();
+        int updatedRows = jdbcTemplate.update(SQL_INSERT_COURSE,
+                entity.getProfessorId(),
+                entity.getName(),
+                entity.getRating(),
+                entity.getComplexity(),
+                entity.getCreationDate(),
+                entity.getIsActual(),
+                entity.getDescription(),
+                entity.getConclusion(),
+                entity.getIcon());
+        if (updatedRows == 0) {
+            return Optional.empty();
+        } else {
+            return Optional.of(entity);
+        }
     }
 
     @Override
     public int update(Course entity) throws DaoException {
-        return 0;
+        int result = jdbcTemplate.update(SQL_UPDATE_COURSE,
+                entity.getProfessorId(),
+                entity.getName(),
+                entity.getRating(),
+                entity.getComplexity(),
+                entity.getCreationDate(),
+                entity.getIsActual(),
+                entity.getDescription(),
+                entity.getConclusion(),
+                entity.getIcon(),
+                entity.getEntityId());
+        return result;
     }
 
     @Override
     public List<Course> findCoursesByActual(boolean isActual) throws DaoException {
-        return null;
+        List<Course> result = jdbcTemplate.queryForList(SQL_SELECT_COURSES_BY_ACTUAL, new CourseMapper(), isActual);
+        return result;
     }
 
     @Override
     public List<Course> findCoursesByProfessor(long professorId) throws DaoException {
-        return null;
+        List<Course> result = jdbcTemplate.queryForList(SQL_SELECT_COURSES_BY_ACTUAL, new CourseMapper(), professorId);
+        return result;
     }
 }

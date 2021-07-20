@@ -15,6 +15,7 @@ public class CourseMapper implements RowMapper<Course> {
         Course course = new Course.Builder()
                 .setCourseId(resultSet.getLong(COURSE_ID))
                 .setProfessorId(resultSet.getLong(COURSE_PROFESSOR_ID))
+                .setName(resultSet.getString(COURSE_NAME))
                 .setRating(resultSet.getDouble(COURSE_RATING))
                 .setComplexity(resultSet.getInt(COURSE_COMPLEXITY))
                 .setCreationDate(resultSet.getDate(COURSE_CREATION_DATE))
