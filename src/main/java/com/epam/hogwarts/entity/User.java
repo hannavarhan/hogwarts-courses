@@ -1,13 +1,12 @@
 package com.epam.hogwarts.entity;
 
-import java.util.Arrays;
-
 public class User extends AbstractEntity {
 
     //todo: can we describe fields as final to guarantee immutability??
     private final String login;
     private final String password;
     private final UserRole role;
+    private final UserStatus status;
     private final String rating;
     private final String name;
     private final String surname;
@@ -21,6 +20,7 @@ public class User extends AbstractEntity {
         this.login = builder.login;
         this.password = builder.password;
         this.role = builder.role;
+        this.status = builder.status;
         this.rating = builder.rating;
         this.name = builder.name;
         this.surname = builder.surname;
@@ -39,6 +39,10 @@ public class User extends AbstractEntity {
 
     public UserRole getRole() {
         return role;
+    }
+
+    public UserStatus getStatus() {
+        return status;
     }
 
     public String getRating() {
@@ -104,6 +108,7 @@ public class User extends AbstractEntity {
         private String login;
         private String password;
         private UserRole role;
+        private UserStatus status;
         private String rating;
         private String name;
         private String surname;
@@ -128,6 +133,11 @@ public class User extends AbstractEntity {
 
         public Builder setRole(UserRole role) {
             this.role = role;
+            return this;
+        }
+
+        public Builder setStatus(UserStatus status) {
+            this.status = status;
             return this;
         }
 

@@ -13,21 +13,23 @@ import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
 
-    private static final String SQL_SELECT_USERS_BY_ROLE = "SELECT id_user, login, password, role_name, rating_name, " +
+    private static final UserDaoImpl instance = new UserDaoImpl();
+
+    private static final String SQL_SELECT_USERS_BY_ROLE = "SELECT id_user, login, password, role_name, status, rating_name, " +
             "users.name, surname, email, avatar, about " +
             "FROM users " +
             "JOIN roles ON roles.id_role = users.id_role " +
             "JOIN rating ON users.rating IN (rating.lower_bound, rating.upper_bound) " +
             "WHERE roles.name = ?;";
 
-    private static final String SQL_SELECT_USER_BY_LOGIN = "SELECT id_user, login, password, role_name, rating_name, " +
+    private static final String SQL_SELECT_USER_BY_LOGIN = "SELECT id_user, login, password, role_name, status, rating_name, " +
             "users.name, surname, email, avatar, about " +
             "FROM users " +
             "JOIN roles ON roles.id_role = users.id_role " +
             "JOIN rating ON users.rating IN (rating.lower_bound, rating.upper_bound) " +
             "WHERE login = ?;";
 
-    private static final String SQL_SELECT_USER_BY_ID = "SELECT id_user, login, password, role_name, rating_name, " +
+    private static final String SQL_SELECT_USER_BY_ID = "SELECT id_user, login, password, role_name, status, rating_name, " +
             "users.name, surname, email, avatar, about " +
             "FROM users " +
             "JOIN roles ON roles.id_role = users.id_role " +
@@ -53,8 +55,12 @@ public class UserDaoImpl implements UserDao {
 
     private JdbcTemplate<User> jdbcTemplate;
 
-    public UserDaoImpl() {
+    private UserDaoImpl() {
         jdbcTemplate = new JdbcTemplate<>(ConnectionPool.getInstance());
+    }
+
+    public static UserDaoImpl getInstance() {
+        return instance;
     }
 
     @Override

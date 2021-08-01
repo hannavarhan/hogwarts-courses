@@ -15,7 +15,7 @@ public class UserDaoImplTest {
 
     @BeforeTest
     public void init() {
-        userDao = new UserDaoImpl();
+        userDao = UserDaoImpl.getInstance();
     }
 
     @Test

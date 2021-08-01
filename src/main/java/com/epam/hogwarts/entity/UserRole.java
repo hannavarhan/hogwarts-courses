@@ -5,7 +5,8 @@ import com.epam.hogwarts.exception.EnumParseException;
 public enum UserRole {
     ADMIN("admin"),
     PROFESSOR("professor"),
-    PUPIL("pupil");
+    PUPIL("pupil"),
+    GUEST("guest");
 
     private String title;
 

@@ -2,6 +2,7 @@ package com.epam.hogwarts.mapper.impl;
 
 import com.epam.hogwarts.entity.User;
 import com.epam.hogwarts.entity.UserRole;
+import com.epam.hogwarts.entity.UserStatus;
 import com.epam.hogwarts.mapper.RowMapper;
 
 import java.sql.ResultSet;
@@ -18,6 +19,7 @@ public class UserMapper implements RowMapper<User> {
                 .setLogin(resultSet.getString(USER_LOGIN))
                 .setPassword(resultSet.getString(USER_PASSWORD))
                 .setRole(UserRole.valueOf(resultSet.getString(ROLE_NAME).toUpperCase()))
+                .setStatus(UserStatus.valueOf(resultSet.getString(USER_STATUS).toUpperCase()))
                 .setRating(resultSet.getString(RATING_NAME))
                 .setName(resultSet.getString(USER_NAME))
                 .setSurname(resultSet.getString(USER_SURNAME))
