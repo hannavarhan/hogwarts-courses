@@ -22,7 +22,7 @@ public class CourseServiceImpl implements CourseService {
     private static final TheoryDao theoryDao = daoProvider.getTheoryDao();
     private static final QuestionDao questionDao = daoProvider.getQuestionDao();
     private static final AnswerDao answerDao = daoProvider.getAnswerDao();
-    private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(CourseServiceImpl.class);
 
     @Override
     public List<Course> getActualCourses(int limit) throws ServiceException {

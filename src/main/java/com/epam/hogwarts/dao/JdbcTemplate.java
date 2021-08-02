@@ -47,7 +47,7 @@ public class JdbcTemplate<T extends AbstractEntity> {
                 result.add(entity);
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't handle UserDao.queryForList request", e);
+            throw new DaoException("Can't handle queryForList request", e);
         }
         return result;
     }
@@ -59,7 +59,7 @@ public class JdbcTemplate<T extends AbstractEntity> {
             setObjectsToStatement(statement, objects);
             result = statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DaoException("Can't handle UserDao.update request", e);
+            throw new DaoException("Can't handle update request", e);
         }
         return result;
     }
@@ -78,7 +78,7 @@ public class JdbcTemplate<T extends AbstractEntity> {
                 result = generatedKeys.getLong(1);
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't handle UserDao.update request", e);
+            throw new DaoException("Can't handle update request", e);
         }
         return result;
     }

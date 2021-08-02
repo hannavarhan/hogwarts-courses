@@ -14,7 +14,6 @@ public class QuestionDaoImpl implements QuestionDao {
 
     private static final QuestionDaoImpl instance = new QuestionDaoImpl();
 
-
     private static final String SQL_SELECT_QUESTION_BY_ID = "SELECT id_question, text, number, id_course " +
             "FROM hogwarts_courses.questions " +
             "WHERE id_question=?;";

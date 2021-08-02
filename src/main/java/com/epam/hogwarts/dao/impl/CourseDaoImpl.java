@@ -112,7 +112,7 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public List<Course> findCoursesByActual(boolean isActual, int limit) throws DaoException {
-        List<Course> result = jdbcTemplate.queryForList(SQL_SELECT_COURSES_BY_ACTUAL_WITH_LIMIT, new CourseMapper(), isActual);
+        List<Course> result = jdbcTemplate.queryForList(SQL_SELECT_COURSES_BY_ACTUAL_WITH_LIMIT, new CourseMapper(), isActual, limit);
         return result;
     }
 

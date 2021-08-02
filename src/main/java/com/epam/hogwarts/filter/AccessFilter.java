@@ -1,5 +1,6 @@
 package com.epam.hogwarts.filter;
 
+import com.epam.hogwarts.command.PagePath;
 import com.epam.hogwarts.command.SessionAttribute;
 import com.epam.hogwarts.entity.UserRole;
 
@@ -21,13 +22,15 @@ public class AccessFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpSession session = req.getSession();
-        UserRole userRole = UserRole.valueOf(session.getAttribute(SessionAttribute.USER_ROLE).toString().toUpperCase());
+        Object attr = session.getAttribute(SessionAttribute.USER_ROLE);
+        String userRoleString = (attr == null ? UserRole.GUEST : attr).toString().toUpperCase();
+        UserRole userRole = UserRole.valueOf(userRoleString);
         //todo: пока всех юзеров на гостевую, но потом надо будет дописать, чтобы те, у кого еще имейл не подтвержден на другую страничку переходили мб
         if (userRole == null) {
             userRole = UserRole.GUEST;
             session.setAttribute(SessionAttribute.USER_ROLE, userRole);
             RequestDispatcher dispatcher = request.getServletContext()
-                    .getRequestDispatcher("/jsp/guest.jsp");
+                    .getRequestDispatcher(PagePath.START_PAGE);
             dispatcher.forward(req, resp);
             return;
         }

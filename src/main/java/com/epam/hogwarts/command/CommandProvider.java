@@ -1,6 +1,7 @@
 package com.epam.hogwarts.command;
 
 import com.epam.hogwarts.command.impl.LoginCommand;
+import com.epam.hogwarts.command.impl.RegisterCommand;
 import com.epam.hogwarts.command.impl.StartPageCommand;
 
 import java.util.EnumMap;
@@ -14,6 +15,7 @@ public class CommandProvider {
     private CommandProvider() {
         commands = new EnumMap<>(CommandType.class);
         commands.put(LOGIN, new LoginCommand());
+        commands.put(REGISTER, new RegisterCommand());
         commands.put(START_PAGE, new StartPageCommand());
         /*commands.put(LOGOUT, new LogoutCommand());
         commands.put(PERSONAL_PAGE, new PersonalPageCommand());

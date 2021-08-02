@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class SystemProperties {
-    private static final String RESOURCE = "system.properties";
+    private static final String RESOURCE = "project.properties";
     private static final Properties properties = new Properties();
     private static final Logger logger = LogManager.getLogger(SystemProperties.class);
     private static final String PAGE_LIMIT_PROPERTY = "page.limit";
@@ -19,7 +19,6 @@ public class SystemProperties {
     private SystemProperties() {}
 
     static {
-        String driverName = null;
         try (InputStream inputStream = SystemProperties.class.getClassLoader().getResourceAsStream(RESOURCE)) {
             if (inputStream == null) {
                 logger.fatal("Can't find property file by name: " + RESOURCE);
@@ -30,8 +29,9 @@ public class SystemProperties {
             logger.fatal("Can't load properties: ", e);
             throw new RuntimeException("Can't load properties: ", e);
         }
-        PAGE_LIMIT = properties.get(PAGE_LIMIT_PROPERTY) == null ?
-                DEFAULT_PAGE_LIMIT : (int) properties.get(PAGE_LIMIT_PROPERTY);
+        String pageLimitPropValue = (String) properties.get(PAGE_LIMIT_PROPERTY);
+        PAGE_LIMIT = pageLimitPropValue == null ?
+                DEFAULT_PAGE_LIMIT : Integer.parseInt(pageLimitPropValue);
     }
 
     public static int getPageLimit() {

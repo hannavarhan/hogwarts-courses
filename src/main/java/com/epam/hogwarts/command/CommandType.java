@@ -3,12 +3,12 @@ package com.epam.hogwarts.command;
 public enum CommandType {
     LOGIN,
     LOGOUT,
+    REGISTER,
     PERSONAL_PAGE,
     DEFAULT,
     START_PAGE,
     GO_TO_LOGIN_PAGE,
     CHANGE_LANGUAGE,
-    SIGN_UP,
     GO_TO_SIGN_UP_PAGE,
     CONFIRM_EMAIL,
     GO_TO_SEND_EMAIL_AGAIN_PAGE,
