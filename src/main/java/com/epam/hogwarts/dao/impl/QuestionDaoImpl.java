@@ -12,6 +12,9 @@ import java.util.Optional;
 
 public class QuestionDaoImpl implements QuestionDao {
 
+    private static final QuestionDaoImpl instance = new QuestionDaoImpl();
+
+
     private static final String SQL_SELECT_QUESTION_BY_ID = "SELECT id_question, text, number, id_course " +
             "FROM hogwarts_courses.questions " +
             "WHERE id_question=?;";
@@ -32,8 +35,12 @@ public class QuestionDaoImpl implements QuestionDao {
 
     private JdbcTemplate<Question> jdbcTemplate;
 
-    public QuestionDaoImpl() {
+    private QuestionDaoImpl() {
         jdbcTemplate = new JdbcTemplate<>(ConnectionPool.getInstance());
+    }
+
+    public static QuestionDaoImpl getInstance() {
+        return instance;
     }
 
     @Override
@@ -44,15 +51,12 @@ public class QuestionDaoImpl implements QuestionDao {
 
     @Override
     public Optional<Question> insert(Question entity) throws DaoException {
-        int updatedRows = jdbcTemplate.update(SQL_INSERT_QUESTION,
+        long questionId = jdbcTemplate.insert(SQL_INSERT_QUESTION,
                 entity.getText(),
                 entity.getNumber(),
                 entity.getCourseId());
-        if (updatedRows == 0) {
-            return Optional.empty();
-        } else {
-            return Optional.of(entity);
-        }
+        entity.setEntityId(questionId);
+        return Optional.of(entity);
     }
 
     @Override
@@ -66,7 +70,7 @@ public class QuestionDaoImpl implements QuestionDao {
     }
 
     @Override
-    public List<Question> findByCoursesId(Long courseId) throws DaoException {
+    public List<Question> findByCourseId(Long courseId) throws DaoException {
         List<Question> result = jdbcTemplate.queryForList(SQL_SELECT_QUESTION_BY_COURSE_ID, new QuestionMapper(), courseId);
         return result;
     }

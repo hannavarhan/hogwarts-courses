@@ -20,14 +20,14 @@ public class UserServiceImpl implements UserService {
     private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
     @Override
-    public boolean registerUser(User user) throws ServiceException {
+    public Optional<User> registerUser(User user) throws ServiceException {
         if (!UserValidator.validate(user)) {
             logger.error("User {} isn't valid", user);
             throw new ServiceException("User isn't valid");
         }
         try {
             Optional<User> result = userDao.insert(user);
-            return result.isPresent();
+            return result;
         } catch (DaoException e) {
             logger.error("Can't register user {}", user);
             throw new ServiceException("Can't register user", e);
@@ -54,6 +54,17 @@ public class UserServiceImpl implements UserService {
         } catch (DaoException e) {
             logger.error("Error while authenticate by login {} and password {}", login, password);
             throw new ServiceException("Error while authenticate", e);
+        }
+    }
+
+    @Override
+    public boolean isLoginAvailable(String login) throws ServiceException {
+        try {
+            Optional<User> userResult = userDao.findUserByLogin(login);
+            return userResult.isEmpty();
+        } catch (DaoException e) {
+            logger.error("Error in isLoginAvailable with login {}", login);
+            throw new ServiceException("Error while isLoginAvailable", e);
         }
     }
 }

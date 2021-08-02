@@ -7,8 +7,10 @@ import java.util.Optional;
 
 public interface UserService {
 
-    boolean registerUser(User user) throws ServiceException;
+    Optional<User> registerUser(User user) throws ServiceException;
 
     Optional<User> authenticate(String login, String password) throws ServiceException;
+
+    boolean isLoginAvailable(String login) throws ServiceException;
 
 }

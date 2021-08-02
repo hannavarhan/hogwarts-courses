@@ -2,14 +2,13 @@ package com.epam.hogwarts.command;
 
 public class RequestParameter {
     public static final String COMMAND = "command";
-    public static final String USERNAME = "username";
-    public static final String FIRSTNAME = "firstName";
-    public static final String LASTNAME = "lastName";
-    public static final String ADDRESS = "address";
+    public static final String USER_NAME = "user_name";
+    public static final String USER_SURNAME = "user_surname";
     public static final String EMAIL = "email";
-    public static final String PHONE = "phone";
+    public static final String ABOUT = "about";
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
+    public static final String REPEAT_PASSWORD = "repeat_password";
     public static final String RECOVER_EMAIL = "recoverEmail";
     public static final String FLOWER_ID = "flowerId";
     public static final String NAME = "name";

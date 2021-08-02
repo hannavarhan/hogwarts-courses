@@ -5,7 +5,7 @@ public enum CommandType {
     LOGOUT,
     PERSONAL_PAGE,
     DEFAULT,
-    HOME_PAGE,
+    START_PAGE,
     GO_TO_LOGIN_PAGE,
     CHANGE_LANGUAGE,
     SIGN_UP,

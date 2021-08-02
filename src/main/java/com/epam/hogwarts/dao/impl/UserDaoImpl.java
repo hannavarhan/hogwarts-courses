@@ -71,7 +71,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> insert(User entity) throws DaoException {
-        int updatedRows = jdbcTemplate.update(SQL_INSERT_USER,
+        long userId = jdbcTemplate.insert(SQL_INSERT_USER,
                 entity.getLogin(),
                 entity.getPassword(),
                 entity.getRole().getTitle(),
@@ -81,11 +81,8 @@ public class UserDaoImpl implements UserDao {
                 entity.getEmail(),
                 entity.getAvatar(),
                 entity.getAbout());
-        if (updatedRows == 0) {
-            return Optional.empty();
-        } else {
-            return Optional.of(entity);
-        }
+        entity.setEntityId(userId);
+        return Optional.of(entity);
     }
 
     @Override

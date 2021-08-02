@@ -12,6 +12,8 @@ import java.util.Optional;
 
 public class CourseDaoImpl implements CourseDao {
 
+    private static final CourseDaoImpl instance = new CourseDaoImpl();
+
     private static final String SQL_SELECT_COURSE_BY_ID = "SELECT id_course, id_professor, courses.name, " +
             "courses.rating, complexity, creation_date, " +
             "is_actual, description, conclusion, icon " +
@@ -41,16 +43,27 @@ public class CourseDaoImpl implements CourseDao {
             "FROM hogwarts_courses.courses " +
             "WHERE is_actual=?;";
 
+    private static final String SQL_SELECT_COURSES_BY_ACTUAL_WITH_LIMIT = "SELECT id_course, id_professor, courses.name, " +
+            "courses.rating, complexity, creation_date, " +
+            "is_actual, description, conclusion, icon " +
+            "FROM hogwarts_courses.courses " +
+            "WHERE is_actual=? " +
+            "LIMIT ?;";
+
     private static final String SQL_SELECT_COURSES_BY_PROFESSOR = "SELECT id_course, id_professor, courses.name, " +
             "courses.rating, complexity, creation_date, " +
             "is_actual, description, conclusion, icon " +
             "FROM hogwarts_courses.courses " +
-            "WHERE id_professor=?;";
+            "WHERE id_professor=?";
 
     private JdbcTemplate<Course> jdbcTemplate;
 
     private CourseDaoImpl() {
         jdbcTemplate = new JdbcTemplate<>(ConnectionPool.getInstance());
+    }
+
+    public static CourseDaoImpl getInstance() {
+        return instance;
     }
 
     @Override
@@ -61,7 +74,7 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public Optional<Course> insert(Course entity) throws DaoException {
-        int updatedRows = jdbcTemplate.update(SQL_INSERT_COURSE,
+        long courseId = jdbcTemplate.insert(SQL_INSERT_COURSE,
                 entity.getProfessorId(),
                 entity.getName(),
                 entity.getRating(),
@@ -71,11 +84,8 @@ public class CourseDaoImpl implements CourseDao {
                 entity.getDescription(),
                 entity.getConclusion(),
                 entity.getIcon());
-        if (updatedRows == 0) {
-            return Optional.empty();
-        } else {
-            return Optional.of(entity);
-        }
+        entity.setEntityId(courseId);
+        return Optional.of(entity);
     }
 
     @Override
@@ -101,8 +111,14 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
+    public List<Course> findCoursesByActual(boolean isActual, int limit) throws DaoException {
+        List<Course> result = jdbcTemplate.queryForList(SQL_SELECT_COURSES_BY_ACTUAL_WITH_LIMIT, new CourseMapper(), isActual);
+        return result;
+    }
+
+    @Override
     public List<Course> findCoursesByProfessor(long professorId) throws DaoException {
-        List<Course> result = jdbcTemplate.queryForList(SQL_SELECT_COURSES_BY_ACTUAL, new CourseMapper(), professorId);
+        List<Course> result = jdbcTemplate.queryForList(SQL_SELECT_COURSES_BY_PROFESSOR, new CourseMapper(), professorId);
         return result;
     }
 }

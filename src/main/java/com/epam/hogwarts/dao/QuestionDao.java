@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface QuestionDao extends BaseDao<Question> {
 
-    List<Question> findByCoursesId(Long courseId) throws DaoException;
+    List<Question> findByCourseId(Long courseId) throws DaoException;
 }

@@ -64,6 +64,25 @@ public class JdbcTemplate<T extends AbstractEntity> {
         return result;
     }
 
+    public long insert(String sql, Object... objects) throws DaoException {
+        long result = 0;
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            setObjectsToStatement(statement, objects);
+            int updatedRows = statement.executeUpdate();
+            if (updatedRows == 0) {
+                throw new DaoException("Couldn't insert");
+            }
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                result = generatedKeys.getLong(1);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Can't handle UserDao.update request", e);
+        }
+        return result;
+    }
+
     private void setObjectsToStatement(PreparedStatement statement, Object... objects) throws SQLException {
         for (int i = 0; i < objects.length; i++) {
             statement.setObject(i+1, objects[i]);

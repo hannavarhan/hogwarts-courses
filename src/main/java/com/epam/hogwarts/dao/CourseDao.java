@@ -9,5 +9,7 @@ public interface CourseDao extends BaseDao<Course> {
 
     List<Course> findCoursesByActual(boolean isActual) throws DaoException;
 
+    List<Course> findCoursesByActual(boolean isActual, int limit) throws DaoException;
+
     List<Course> findCoursesByProfessor(long professorId) throws DaoException;
 }

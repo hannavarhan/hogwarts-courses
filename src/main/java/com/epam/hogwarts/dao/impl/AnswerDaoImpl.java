@@ -12,6 +12,8 @@ import java.util.Optional;
 
 public class AnswerDaoImpl implements AnswerDao {
 
+    private static final AnswerDaoImpl instance = new AnswerDaoImpl();
+
     private static final String SQL_SELECT_ANSWER_BY_ID = "SELECT id_answer, id_question, answer, is_correct " +
             "FROM hogwarts_courses.answers " +
             "WHERE id_answer=?;";
@@ -36,6 +38,10 @@ public class AnswerDaoImpl implements AnswerDao {
         jdbcTemplate = new JdbcTemplate<>(ConnectionPool.getInstance());
     }
 
+    public static AnswerDaoImpl getInstance() {
+        return instance;
+    }
+
     @Override
     public Optional<Answer> findById(Long id) throws DaoException {
         Optional<Answer> result = jdbcTemplate.query(SQL_SELECT_ANSWER_BY_ID, new AnswerMapper(), id);
@@ -44,15 +50,12 @@ public class AnswerDaoImpl implements AnswerDao {
 
     @Override
     public Optional<Answer> insert(Answer entity) throws DaoException {
-        int updatedRows = jdbcTemplate.update(SQL_INSERT_ANSWER,
+        long answerId = jdbcTemplate.insert(SQL_INSERT_ANSWER,
                 entity.getQuestionId(),
                 entity.getText(),
                 entity.isCorrect());
-        if (updatedRows == 0) {
-            return Optional.empty();
-        } else {
-            return Optional.of(entity);
-        }
+        entity.setEntityId(answerId);
+        return Optional.of(entity);
     }
 
     @Override

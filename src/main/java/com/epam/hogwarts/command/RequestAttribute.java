@@ -5,6 +5,7 @@ public class RequestAttribute {
     public static final String ERROR_KEY = "error_key";
     public static final String EMAIL_NOT_CONFIRMED = "email_not_confirmed";
     public static final String ROLE = "role";
+    public static final String COURSE_LIST = "course_list";
     public static final String DUPLICATE_EMAIL = "duplicateEmail";
     public static final String EMAIL_SENT = "emailSent";
     public static final String WRONG_DATA = "wrongData";
@@ -12,7 +13,6 @@ public class RequestAttribute {
     public static final String EMAIL_NOT_EXISTS = "emailNotExists";
     public static final String ORDER = "order";
     public static final String ORDER_FLOWER = "orderFlowerList";
-    public static final String FLOWER = "flower";
     public static final String STORAGE = "storage";
     public static final String FLOWER_TYPE = "flowerTypeSelected";
     public static final String FLOWER_LIST = "flowerList";

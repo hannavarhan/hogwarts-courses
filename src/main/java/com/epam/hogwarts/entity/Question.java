@@ -1,6 +1,6 @@
 package com.epam.hogwarts.entity;
 
-public class Question extends AbstractEntity {
+public class Question extends Block {
 
     private final String text;
     private final int number;
