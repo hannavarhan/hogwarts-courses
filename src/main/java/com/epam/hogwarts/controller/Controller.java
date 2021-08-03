@@ -1,8 +1,7 @@
 package com.epam.hogwarts.controller;
 
-import com.epam.hogwarts.command.*;
+import com.epam.hogwarts.controller.command.*;
 import com.epam.hogwarts.model.pool.ConnectionPool;
-import com.epam.hogwarts.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

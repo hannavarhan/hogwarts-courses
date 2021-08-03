@@ -1,7 +1,7 @@
 package com.epam.hogwarts.model.pool;
 
 import com.epam.hogwarts.exception.NotificationException;
-import com.epam.hogwarts.service.impl.TelegramNotificationSenderServiceImpl;
+import com.epam.hogwarts.model.service.impl.TelegramNotificationSenderServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

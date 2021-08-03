@@ -12,8 +12,11 @@ public class SystemProperties {
     private static final Properties properties = new Properties();
     private static final Logger logger = LogManager.getLogger(SystemProperties.class);
     private static final String PAGE_LIMIT_PROPERTY = "page.limit";
+    private static final String NOTIFICATION_ATTEMPT_PROPERTY = "notification.attempt";
 
     private static final int PAGE_LIMIT;
+    private static final int NOTIFICATION_ATTEMPTS;
+
     private static final int DEFAULT_PAGE_LIMIT = 20;
 
     private SystemProperties() {}
@@ -30,11 +33,18 @@ public class SystemProperties {
             throw new RuntimeException("Can't load properties: ", e);
         }
         String pageLimitPropValue = (String) properties.get(PAGE_LIMIT_PROPERTY);
+        String notificationAttemptPropValue = (String) properties.get(NOTIFICATION_ATTEMPT_PROPERTY);
         PAGE_LIMIT = pageLimitPropValue == null ?
                 DEFAULT_PAGE_LIMIT : Integer.parseInt(pageLimitPropValue);
+        NOTIFICATION_ATTEMPTS = Integer.parseInt(notificationAttemptPropValue);
+
     }
 
     public static int getPageLimit() {
         return PAGE_LIMIT;
+    }
+
+    public static int getNotificationAttempts() {
+        return NOTIFICATION_ATTEMPTS;
     }
 }

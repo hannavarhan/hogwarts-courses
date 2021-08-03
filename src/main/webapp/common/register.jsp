@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -36,15 +38,17 @@
 				Lands to the peasants, factories to the workers, Magic to the magls with
 				<span style="font-family: Magic School One; font-weight: bold; font-size: 30pt;">HogwartS.Online</span>
 			</div>
+			<c:url value="/controller?command=register" var="var"/>
 			<form method="POST">
 				<div class="cell text-left large-offset-1 small-1">
 					<label class="login-page">
 						Email
-						<input style="width: 85%; border-radius: 3px; padding-left: 0;" type="email" required
+						<input style="width: 85%; border-radius: 3px; padding-left: 0;" type="email" required id="email" name="email"
 							placeholder="fuckingfoundation@bicthes.com" aria-describedby="loginHelpText">
 					</label>
+					<c:url value="/controller?command=go_to_login_page" var="login"/>
 					<p class="help-text" style="font-family: SofiaProLight;" id="loginHelpText">
-						Have account? <a href="#">Sing in</a>
+						Have account? <a href="${login}">Login</a>
 					</p>
 				</div>
 				<div class="cell text-left large-offset-1 small-1">
@@ -52,13 +56,13 @@
 					<div class="grid-x">
 						<div class="small-4 cell">
 							<label class="login-page">Name
-								<input style=" border-radius: 3px;" type="text" required pattern="[A-z]+" minlength="2">
+								<input style=" border-radius: 3px;" type="text" required pattern="[A-z]+" minlength="2" id="user_name" name="user_name">
 							</label>
 						</div>
 						<div class="small-2"></div>
 						<div class="small-4 cell">
 							<label class="login-page">Surname
-								<input style=" border-radius: 3px;" type="text" required pattern="[A-z]+" minlength="2">
+								<input style=" border-radius: 3px;" type="text" required pattern="[A-z]+" minlength="2" id="user_surname" name="user_surname">
 							</label>
 						</div>
 						<div class="small-2"></div>
@@ -67,7 +71,7 @@
 				</div>
 				<div class="cell text-left large-offset-1 small-1">
 					<label class="login-page">Password
-						<input class="login-input" id="password" required minlength="10" type="password"
+						<input class="login-input" id="password" required minlength="10" type="password" name="password"
 							aria-describedby="passwordHelpText">
 					</label>
 					<p class="help-text" style="font-family: SofiaProLight;" id="passwordHelpText">Your password must
@@ -76,14 +80,18 @@
 				</div>
 				<div class="cell text-left large-offset-1 small-1">
 					<label class="login-page" id="repeatpassword">Repeat password
-						<input class="login-input" required minlength="10" type="password">
+						<input class="login-input" required minlength="10" type="password" id="repeat_password" name="repeat_password">
 					</label>
 				</div>
 				<div class="cell text-left large-offset-1 small-1">
 					<label class="login-page">About
-						<textarea style="border-radius: 3px; width: 85%;"></textarea>
+						<textarea id="about" name="about" style="border-radius: 3px; width: 85%;"></textarea>
 					</label>
 				</div>
+				<c:if test="${error}">
+					<p class="help-text" style="font-family: SofiaProLight;" id="passwordHelpText2">${error_key} Do no corresp
+					</p>
+				</c:if>
 				<div class="cell text-left large-offset-1 small-1">
 					<button class="login button success"
 						style="width: 85%;color: white; margin-bottom: 60px;background-color: #4bb34b; box-shadow: -4px 4px 0 #004220;"

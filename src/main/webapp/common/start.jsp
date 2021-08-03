@@ -22,9 +22,9 @@
 		</div>
 		<div class="top-bar-right ">
 			<ul class="dropdown middle align-middle menu" data-dropdown-menu>
-				<c:url value="/controller?command=login" var="login"/>
+				<c:url value="/controller?command=go_to_login_page" var="login"/>
 				<li class="menu-text"><a href="${login}" class="button">Login</a></li>
-				<c:url value="/controller?command=register" var="register"/>
+				<c:url value="/controller?command=go_to_register_page" var="register"/>
 				<li class="menu-text"><a href="${register}" class="button">Register</a></li>
 				<li class="menu-text"><a href="?lang=en"><img class="img-flag" src="img/4x3/gb.svg"></a></li>
 				<li class="menu-text"><a href="?lang=ru"><img class="img-flag" src="img/4x3/ru.svg"></a></li>

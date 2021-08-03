@@ -1,6 +1,6 @@
 package com.epam.hogwarts.validator;
 
-import com.epam.hogwarts.entity.User;
+import com.epam.hogwarts.model.entity.User;
 
 public class UserValidator {
 

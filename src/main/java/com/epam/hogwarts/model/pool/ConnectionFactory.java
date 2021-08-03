@@ -1,6 +1,5 @@
 package com.epam.hogwarts.model.pool;
 
-import com.epam.hogwarts.entity.UserRole;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
