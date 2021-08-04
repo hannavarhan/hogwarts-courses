@@ -68,7 +68,7 @@ Trigger event | The pupil presses the button "Enroll”.
 Pre-condition | The pupil is logged in, selects course.
 Post-condition | If the use case is successful, the pupil enrolls in a course. Otherwise, the state of the system will not change.
 #### Basic path:
-1. The system asks for an information in registration form.
+1. The system asks for information in registration form.
 3. Guest fills necessary fields and confirms form.
 4. The system validate filled information, displays a message about an email sent and input form for token and sends an email with a token for confirmation to the user's mail.
 5. User inputs token.
