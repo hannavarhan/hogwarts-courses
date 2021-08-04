@@ -32,7 +32,7 @@ public class EmailNotificationSenderServiceImpl implements EmailNotificationSend
 
         String recipientEmail = notification.getEmail();
         String subject = notification.getSubject();
-        String content = notification.getText() + " " + notification.getToken(); //fixme
+        String content = notification.getText();
         try {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
             message.setSubject(subject);

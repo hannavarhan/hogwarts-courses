@@ -67,4 +67,17 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("Error while isLoginAvailable", e);
         }
     }
+
+    @Override
+    public boolean updateUser(User user) throws ServiceException {
+        try {
+            int updated = userDao.update(user);
+            return updated > 0;
+        } catch (DaoException e) {
+            logger.error("Error in updateUser with login {}", user.getLogin());
+            throw new ServiceException("Error while updateUser", e);
+        }
+    }
+
+
 }

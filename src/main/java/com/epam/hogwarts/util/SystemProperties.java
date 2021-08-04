@@ -13,9 +13,14 @@ public class SystemProperties {
     private static final Logger logger = LogManager.getLogger(SystemProperties.class);
     private static final String PAGE_LIMIT_PROPERTY = "page.limit";
     private static final String NOTIFICATION_ATTEMPT_PROPERTY = "notification.attempt";
+    private static final String SECURITY_KEY_PROPERTY = "security.key";
+    private static final String SECURITY_ALGORITHM_PROPERTY = "security.algorithm";
 
     private static final int PAGE_LIMIT;
     private static final int NOTIFICATION_ATTEMPTS;
+
+    private static final String SECURITY_KEY;
+    private static final String SECURITY_ALGORITHM;
 
     private static final int DEFAULT_PAGE_LIMIT = 20;
 
@@ -37,7 +42,8 @@ public class SystemProperties {
         PAGE_LIMIT = pageLimitPropValue == null ?
                 DEFAULT_PAGE_LIMIT : Integer.parseInt(pageLimitPropValue);
         NOTIFICATION_ATTEMPTS = Integer.parseInt(notificationAttemptPropValue);
-
+        SECURITY_KEY = (String) properties.get(SECURITY_KEY_PROPERTY);
+        SECURITY_ALGORITHM = (String) properties.get(SECURITY_ALGORITHM_PROPERTY);
     }
 
     public static int getPageLimit() {
@@ -46,5 +52,13 @@ public class SystemProperties {
 
     public static int getNotificationAttempts() {
         return NOTIFICATION_ATTEMPTS;
+    }
+
+    public static String getSecurityKey() {
+        return SECURITY_KEY;
+    }
+
+    public static String getSecurityAlgorithm() {
+        return SECURITY_ALGORITHM;
     }
 }

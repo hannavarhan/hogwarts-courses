@@ -3,7 +3,9 @@ package com.epam.hogwarts.controller.command;
 public enum CommandType {
     LOGIN,
     LOGOUT,
-    REGISTER,
+    REGISTER_PUPIL,
+    REGISTER_PROFESSOR,
+    VERIFY_TOKEN,
     START_PAGE,
     GO_TO_LOGIN_PAGE,
     GO_TO_REGISTER_PAGE,

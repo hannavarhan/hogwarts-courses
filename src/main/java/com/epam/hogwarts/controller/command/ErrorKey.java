@@ -8,6 +8,7 @@ public class ErrorKey {
     public static final String REGISTER_ERROR = "register_page.error_message";
     public static final String REGISTER_LOGIN_NOT_AVAILABLE = "register_page.error.login_not_available";
     public static final String REGISTER_EMAIL_NOT_SENT = "register_page.error.email_not_sent";
+    public static final String TOKEN_ERROR = "token_page.error_message";
     public static final String EMAIL_NOT_CONFIRMED = "error.email_not_confirmed";
     public static final String LOGIN_USER_NOT_APPROVED = "login_page.not_approved";
     public static final String LOGIN_USER_NOT_ACTIVE = "login_page.blocked";

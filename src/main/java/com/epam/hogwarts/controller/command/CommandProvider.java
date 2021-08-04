@@ -13,7 +13,8 @@ public class CommandProvider {
     private CommandProvider() {
         commands = new EnumMap<>(CommandType.class);
         commands.put(LOGIN, new LoginCommand());
-        commands.put(REGISTER, new RegisterCommand());
+        commands.put(REGISTER_PUPIL, new RegisterPupilCommand());
+        commands.put(VERIFY_TOKEN, new VerifyTokenCommand());
         commands.put(START_PAGE, new StartPageCommand());
         commands.put(GO_TO_LOGIN_PAGE, new GoToLoginPageCommand());
         commands.put(GO_TO_REGISTER_PAGE, new GoToRegisterPageCommand());

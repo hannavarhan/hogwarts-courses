@@ -13,4 +13,6 @@ public interface UserService {
 
     boolean isLoginAvailable(String login) throws ServiceException;
 
+    boolean updateUser(User user) throws ServiceException;
+
 }

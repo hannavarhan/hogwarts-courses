@@ -6,7 +6,7 @@ public class User extends AbstractEntity {
     private final String login;
     private final String password;
     private final UserRole role;
-    private final UserStatus status;
+    private UserStatus status;
     private final String rating;
     private final String name;
     private final String surname;
@@ -71,6 +71,10 @@ public class User extends AbstractEntity {
 
     public double getRatingDouble() {
         return ratingDouble;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
     }
 
     public void setRatingDouble(double ratingDouble) {

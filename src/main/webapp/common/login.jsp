@@ -31,33 +31,31 @@
 
 <div class="grid-container" style="height: 100px;"></div>
 
-<div class="grid-container"
-     style="background-color: white; border-radius: 6px ; width: 50%; box-shadow: inset 0 0 30px;">
+<div class="grid-container" style="background-color: white; border-radius: 6px ; width: 50%; box-shadow: inset 0 0 30px;">
     <div class="grid-y  align-center  text-center" style="height: 450px;">
         <div class="cell small-1"></div>
         <div class="cell small-2" style="font-family: SofiaProMedium; font-size: 24pt;">Welcome to <span
                 style="font-family: Magic School One;">HogwartS.Online</span></div>
-        <c:url value="/controller?command=login" var="var"/>
-        <form actin="${var} method="POST"/>
-        <div class="cell text-left large-offset-1 small-3">
-            <label class="login-page">
-                Email
-                <input style="width: 85%; border-radius: 3px; padding-left: 0;" type="email" id="login" name="login"
-                       placeholder="fuckingfoundation@bicthes.com" aria-describedby="loginHelpText">
-            </label>
-            <c:url value="/controller?command=go_to_register_page" var="login"/>
-            <p class="help-text" style="font-family: SofiaProLight;" id="loginHelpText">
+        <form method="POST" action="${pageContext.request.contextPath}/controller?command=login">
+            <div class="cell text-left large-offset-1 small-3">
+                <label class="login-page">
+                    Login
+                    <input style="width: 85%; border-radius: 3px; padding-left: 0;" type="text" pattern="[A-z]+([A-z]|[0-9])*" id="login"  name="login"
+                           placeholder="cuteAndrei24" aria-describedby="loginHelpText">
+                </label>
+            <c:url value="/controller?command=go_to_register_page" var="register"/>
+                <p class="help-text" style="font-family: SofiaProLight;" id="loginHelpText">
                 Don't have account? <a href="${register}">Register</a>
-            </p>
-        </div>
-        <div class="cell text-left large-offset-1 small-3">
-            <label class="login-page">Password
-                <input class="login-input" type="password" id="password"  name="password"aria-describedby="passwordHelpText">
-            </label>
-            <p class="help-text" style="font-family: SofiaProLight;" id="passwordHelpText">Your password must
-                have at least 10 characters, a number.
-            </p>
-        </div>
+                </p>
+            </div>
+            <div class="cell text-left large-offset-1 small-3">
+                <label class="login-page">Password
+                <input class="login-input" type="password" id="password"  name="password" aria-describedby="passwordHelpText">
+                </label>
+                <p class="help-text" style="font-family: SofiaProLight;" id="passwordHelpText">Your password must
+                    have at least 10 characters, a number.
+                </p>
+            </div>
         <c:if test="${error}">
             <p class="help-text" style="font-family: SofiaProLight;" id="passwordHelpText2">${error_key}Wrong login and/or password
             </p>
@@ -66,13 +64,10 @@
             <p class="help-text" style="font-family: SofiaProLight;" id="passwordHelpText3">${error_key}
             </p>
         </c:if>
-        <div class="cell text-left large-offset-1 small-1">
-            <button class="login button success"
-                    style="width: 85%;color: white; margin-bottom: 60px;background-color: #4bb34b; box-shadow: -4px 4px 0 #004220;"
-                    type="submit">Login
-            </button>
-        </div>
-        <div class="cell small-2"></div>
+            <div class="cell text-left large-offset-1 small-1">
+                <button  class="login button success" style="width: 85%;color: white; margin-bottom: 60px;background-color: #4bb34b; box-shadow: -4px 4px 0 #004220;" type="submit">Login</button>
+            </div>
+            <div class="cell small-2"></div>
         </form>
     </div>
 </div>

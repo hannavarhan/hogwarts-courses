@@ -1,38 +1,37 @@
 @font-face {
     font-family: 'Magic School One';
-    src        : url('font/MagicSchoolOne.woff2') format('woff2'),
-        url('font/MagicSchoolOne.woff') format('woff');
-    font-weight : normal;
-    font-style  : normal;
+    src: url('font/MagicSchoolOne.woff2') format('woff2'), url('font/MagicSchoolOne.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
     font-display: swap;
 }
 
 @font-face {
     font-family: 'CurcumRegular';
     font-weight: normal;
-    font-style : normal;
-    src        : url('font/Rubik-Medium.woff') format('woff');
+    font-style: normal;
+    src: url('font/Rubik-Medium.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Molot';
     font-weight: normal;
-    font-style : normal;
-    src        : url('font/Molot.woff') format('woff');
+    font-style: normal;
+    src: url('font/Molot.woff') format('woff');
 }
 
 @font-face {
     font-family: 'SofiaProMedium';
-    font-style : normal;
+    font-style: normal;
     font-weight: normal;
-    src        : url('font/SofiaProMediumAz.woff') format('woff');
+    src: url('font/SofiaProMediumAz.woff') format('woff');
 }
 
 @font-face {
     font-family: 'SofiaProLight';
-    font-style : normal;
+    font-style: normal;
     font-weight: normal;
-    src        : url('font/SofiaProLightAz.woff') format('woff');
+    src: url('font/SofiaProLightAz.woff') format('woff');
 }
 
 .top-bar {
@@ -45,15 +44,15 @@
 
 a.logo {
     font-family: 'Magic School One';
-    font-size  : 36pt;
-    color      : white;
+    font-size: 36pt;
+    color: white;
 }
 
 a.button {
-    color           : white;
+    color: white;
     background-color: transparent;
-    border-radius   : 3px;
-    border-color    : #DDC5A2;
+    border-radius: 3px;
+    border-color: #DDC5A2;
 }
 
 a.button:hover {
@@ -64,14 +63,13 @@ a:visited {
     color: white;
 }
 
-
 body {
     background-image: url('\img\pepe-the-frog-wallpapers-wallpaper-cave-2.jpg');
 }
 
 footer {
     font-family: 'SofiaProMedium';
-    width      : 100%;
+    width: 100%;
 }
 
 hr {
@@ -87,7 +85,7 @@ div.rights {
 }
 
 div.coursename {
-    font-size  : 24pt;
+    font-size: 20pt;
     font-family: 'CurcumRegular';
 }
 
@@ -98,89 +96,75 @@ div.addinf {
 div.rating-text {
     padding-top: 15px;
     font-family: 'CurcumRegular';
-
     text-align: left;
 }
 
 .rating-mini {
-    display  : inline-block;
+    display: inline-block;
     font-size: 0;
 }
 
 .rating-mini span {
-    padding    : 0;
-    font-size  : 20px;
+    padding: 0;
+    font-size: 18px;
     line-height: 1;
-    color      : lightgrey;
-}
-
-.rating-mini>span:before {
-    content: '★';
+    color: lightgrey;
 }
 
 .rating-mini>span.active {
-    color           : gold;
+    color: gold;
     background-color: white;
 }
 
 a.button.fuck {
-    color           : #228b22;
+    color: #228b22;
     background-color: transparent;
-    margin-bottom   : 0px;
-    border-radius   : 3px;
-    border-color    : #228b22;
+    margin-bottom: 0px;
+    border-radius: 3px;
+    border-color: #228b22;
 }
 
 a.button.fuck:hover {
     border-color: #145714;
-    color       : #145714;
+    color: #145714;
 }
 
 div.whiteback {
     background-color: white;
-    margin-left     : 15%;
-    margin-right    : 15%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover,
-.next:hover {
+.prev:hover, .next:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Caption text */
 .text {
-    color     : black;
-    font-size : 15px;
-    padding   : 8px 12px;
-    bottom    : 8px;
-    width     : 100%;
+    color: black;
+    font-size: 15px;
+    padding: 8px 12px;
+    bottom: 8px;
+    width: 100%;
     text-align: center;
 }
 
-
-
-
-
-.active,
-.dot:hover {
+.active, .dot:hover {
     background-color: #717171;
 }
 
 /* Fading animation */
+
 .fade {
-    -webkit-animation-name    : fade;
+    -webkit-animation-name: fade;
     -webkit-animation-duration: 1.5s;
-    animation-name            : fade;
-    animation-duration        : 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
 }
 
 @-webkit-keyframes fade {
     from {
         opacity: .4
     }
-
     to {
         opacity: 1
     }
@@ -190,15 +174,14 @@ div.whiteback {
     from {
         opacity: .4
     }
-
     to {
         opacity: 1
     }
 }
 
 .slide-img {
-    width        : 100%;
-    height       : 240px;
+    width: 100%;
+    height: 240px;
     border-radius: 10px 10px 0px 0px;
 }
 
@@ -208,7 +191,7 @@ div.whiteback {
 
 .login {
     border-radius: 3px;
-    font-family  : 'CurcumRegular';
+    font-family: 'CurcumRegular';
 }
 
 input {
@@ -216,32 +199,110 @@ input {
 }
 
 .login-page {
-    font-size   : 18pt;
-    font-family : 'SofiaProMedium';
+    font-size: 18pt;
+    font-family: 'SofiaProMedium';
 }
 
 .login-input {
-    width        : 85%;
     border-radius: 3px;
-    padding-left : 0;
+    padding-left: 0;
 }
-
 
 input:valid {
     background: url('img/tick.png');
     background-size: 20px;
     background-repeat: no-repeat;
-    background-position: 95% 50%;
-  }
-  input:invalid {
+    background-position: 97% 50%;
+}
+
+input:invalid {
     background: url('img/wrong.png');
     background-size: 20px;
     background-repeat: no-repeat;
-    background-position: 95% 50%;
-  }
-  input.invalid {
+    background-position: 97% 50%;
+}
+
+input.invalid {
     background: url('img/wrong.png');
     background-size: 20px;
     background-repeat: no-repeat;
-    background-position: 95% 50%;
-  }
+    background-position: 97% 50%;
+}
+
+.button {
+    border-radius: 3px;
+    margin: 0;
+}
+
+table {
+    border: none;
+}
+
+tbody {
+    border: none;
+    font-family: 'SofiaProLight';
+}
+
+thead {
+    border: none;
+    font-family: 'SofiaProMedium';
+    color: white;
+    font-size: 14pt;
+    background-color: #1E0000;
+}
+
+table tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+table tr:last-child {
+    background-color: #1E0000;
+}
+
+button.hollow.success {
+    border-color: white;
+}
+
+.introduction {
+    font-family: 'SofiaProMedium';
+    font-size: 18pt;
+    text-align: center;
+}
+
+.hidden {
+    visibility: hidden;
+    max-height: 0;
+}
+
+.newquestion {
+    padding: 3px;
+}
+
+.question {
+    padding: 15px 0;
+    border-radius: 3px;
+    font-family: 'SofiaProLight';
+}
+
+.answer:valid {
+    background: none;
+    border-radius: 3px;
+}
+
+.questtext {
+    border-radius: 3px;
+}
+
+.inputq
+{
+    border-radius: 3px;
+    background: none;
+    width: 10%;
+}
+
+.inputq:valid
+{
+    border-radius: 3px;
+    background: none;
+    width: 10%;
+}

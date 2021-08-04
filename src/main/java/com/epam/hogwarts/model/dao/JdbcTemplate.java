@@ -5,10 +5,7 @@ import com.epam.hogwarts.exception.DaoException;
 import com.epam.hogwarts.model.mapper.RowMapper;
 import com.epam.hogwarts.model.pool.ConnectionPool;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -67,7 +64,7 @@ public class JdbcTemplate<T extends AbstractEntity> {
     public long insert(String sql, Object... objects) throws DaoException {
         long result = 0;
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             setObjectsToStatement(statement, objects);
             int updatedRows = statement.executeUpdate();
             if (updatedRows == 0) {

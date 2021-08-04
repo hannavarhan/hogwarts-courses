@@ -73,6 +73,7 @@ public class CreateCourseCommand implements Command {
                 answer.setText(answerText[i*answerAmount + j]);
             }
         }
+        return result;
 
     }
 

@@ -9,6 +9,7 @@ public class RequestParameter {
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
     public static final String REPEAT_PASSWORD = "repeat_password";
+    public static final String TOKEN = "token";
 
     public static final String COURSE_NAME = "course_name";
     public static final String COURSE_COMPLEXITY = "course_complexity";
