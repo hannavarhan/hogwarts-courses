@@ -16,6 +16,8 @@ Admin | Can register new professors.
 
 # Use cases
 
+![Alt text](use_case_model.jpg?raw=true "Use case view")
+
 ### 1. Login
 
 Goal | Login
