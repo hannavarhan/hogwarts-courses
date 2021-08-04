@@ -1,6 +1,6 @@
 # final-epam-project
 
-#Hogwarts Online
+#Hogwarts Online#
 
 Guest can register to the system and then look through different courses created by professors of Hogwarts School of Witchcraft and Wizardry.
 Pupils can also enroll in these courses and study them. After studying, pupils can leave feedback and rate course. Professors (registered by admin) can create and delete courses.
