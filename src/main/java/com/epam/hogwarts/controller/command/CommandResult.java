@@ -2,6 +2,10 @@ package com.epam.hogwarts.controller.command;
 
 public class CommandResult {
 
+    public enum RoutingType {
+        FORWARD, REDIRECT
+    }
+
     private RoutingType routingType;
     private String page;
 
@@ -18,7 +22,4 @@ public class CommandResult {
         return page;
     }
 
-    public enum RoutingType {
-        FORWARD, REDIRECT
-    }
 }

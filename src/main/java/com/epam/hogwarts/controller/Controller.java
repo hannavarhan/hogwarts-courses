@@ -37,16 +37,15 @@ public class Controller extends HttpServlet {
         Command command = commandProvider.getCommand(commandName);
         CommandResult commandResult = command.execute(request);
         switch (commandResult.getRoutingType()) {
-            case REDIRECT:
-                response.sendRedirect(commandResult.getPage());
-                break;
-            case FORWARD:
+            case REDIRECT -> response.sendRedirect(commandResult.getPage());
+            case FORWARD -> {
                 RequestDispatcher dispatcher = request.getRequestDispatcher(commandResult.getPage());
                 dispatcher.forward(request, response);
-                break;
-            default:
+            }
+            default -> {
                 logger.error("incorrect route type {}", commandResult.getRoutingType());
                 response.sendRedirect(PagePath.ERROR_PAGE);
+            }
         }
     }
 }

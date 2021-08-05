@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class CreateCourseCommand implements Command {
@@ -26,7 +27,6 @@ public class CreateCourseCommand implements Command {
         Course course = getCourseFromParameters(request);
         ArrayList<Theory> theories = getTheoriesFromRequest(request);
         ArrayList<QuestionWithAnswers> questionsWithAnswers = getQuestionWithAnswersFromRequest(request);
-        ArrayList<Answer> answers = (ArrayList<Answer>) request.getAttribute(RequestAttribute.ANSWERS);
 
         CourseService courseService = ServiceProvider.getInstance().getCourseService();
         try {
@@ -70,11 +70,16 @@ public class CreateCourseCommand implements Command {
             ArrayList<Answer> answers = new ArrayList<>();
             for (int j = 0; j < answerAmount; j++) {
                 Answer answer = new Answer(1);
-                answer.setText(answerText[i*answerAmount + j]);
+                answer.setText(answerText[j]);
+                answer.setCorrect(Boolean.parseBoolean(answerIsCorrect[j]));
+                answers.add(answer);
             }
+            answerText = (String[]) Arrays.stream(answerText).skip(answerAmount).toArray();
+            answerIsCorrect = (String[]) Arrays.stream(answerIsCorrect).skip(answerAmount).toArray();
+            QuestionWithAnswers questionWithAnswers = new QuestionWithAnswers(question, answers);
+            result.add(questionWithAnswers);
         }
         return result;
-
     }
 
     private ArrayList<Theory> getTheoriesFromRequest(HttpServletRequest request) {
