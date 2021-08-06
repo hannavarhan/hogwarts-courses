@@ -12,4 +12,6 @@ public interface CourseDao extends BaseDao<Course> {
     List<Course> findCoursesByActual(boolean isActual, int limit) throws DaoException;
 
     List<Course> findCoursesByProfessor(long professorId) throws DaoException;
+
+    boolean updateCourseActual(long courseId, boolean isActual) throws DaoException;
 }

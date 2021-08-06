@@ -56,6 +56,10 @@ public class CourseDaoImpl implements CourseDao {
             "FROM hogwarts_courses.courses " +
             "WHERE id_professor=?";
 
+    private static final String SQL_UPDATE_IS_ACTUAL = "UPDATE hogwarts_courses.courses SET " +
+            "is_actual=? " +
+            "WHERE id_course=?;";
+
     private JdbcTemplate<Course> jdbcTemplate;
 
     private CourseDaoImpl() {
@@ -120,5 +124,11 @@ public class CourseDaoImpl implements CourseDao {
     public List<Course> findCoursesByProfessor(long professorId) throws DaoException {
         List<Course> result = jdbcTemplate.queryForList(SQL_SELECT_COURSES_BY_PROFESSOR, new CourseMapper(), professorId);
         return result;
+    }
+
+    @Override
+    public boolean updateCourseActual(long courseId, boolean isActual) throws DaoException {
+        int result = jdbcTemplate.update(SQL_UPDATE_IS_ACTUAL, isActual, courseId);
+        return result > 0;
     }
 }

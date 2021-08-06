@@ -1,16 +1,19 @@
 package com.epam.hogwarts.model.service.impl;
 
+import com.epam.hogwarts.exception.DaoException;
+import com.epam.hogwarts.exception.ServiceException;
 import com.epam.hogwarts.model.dao.DaoProvider;
 import com.epam.hogwarts.model.dao.UserDao;
 import com.epam.hogwarts.model.entity.User;
-import com.epam.hogwarts.exception.DaoException;
-import com.epam.hogwarts.exception.ServiceException;
+import com.epam.hogwarts.model.entity.UserRole;
+import com.epam.hogwarts.model.entity.UserStatus;
 import com.epam.hogwarts.model.service.UserService;
 import com.epam.hogwarts.util.PasswordEncryptor;
 import com.epam.hogwarts.validator.UserValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
@@ -79,5 +82,25 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public boolean deleteUser(long userId) throws ServiceException {
+        try {
+            boolean isSuccessful = userDao.updateUserStatus(userId, UserStatus.NOT_ACTUAL);
+            return isSuccessful;
+        } catch (DaoException e) {
+            logger.error("Error in deleteUser with userId {}", userId);
+            throw new ServiceException("Error while deleteUser", e);
+        }
+    }
 
+    @Override
+    public List<User> getActualProfessors() throws ServiceException {
+        try {
+            List<User> result = userDao.findActualUsersByRole(UserRole.PROFESSOR);
+            return result;
+        } catch (DaoException e) {
+            logger.error("Error in getActualProfessors");
+            throw new ServiceException("Error while getActualProfessors", e);
+        }
+    }
 }

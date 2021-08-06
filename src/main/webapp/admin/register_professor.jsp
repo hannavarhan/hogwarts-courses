@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -10,7 +12,7 @@
 	<title></title>
 </head>
 
-<body style="background-image: url('img/pexels-photo-7978770.jpeg');">
+<body style="background-image: url('../img/pexels-photo-7978770.jpeg');">
 
 	<div class="top-bar">
 		<div class="top-bar-left">
@@ -20,9 +22,9 @@
 		</div>
 		<div class="top-bar-right ">
 			<ul class="dropdown middle align-middle menu" data-dropdown-menu>
-				<li class="menu-text"><a href="?lang=en"><img class="img-flag" src="img/4x3/gb.svg"></a></li>
-				<li class="menu-text"><a href="?lang=ru"><img class="img-flag" src="img/4x3/ru.svg"></a></li>
-				<li class="menu-text"><a href="?lang=by"><img class="img-flag" src="img/4x3/by.svg"></a></li>
+				<li class="menu-text"><a href="?lang=en"><img class="img-flag" src="../img/4x3/gb.svg"></a></li>
+				<li class="menu-text"><a href="?lang=ru"><img class="img-flag" src="../img/4x3/ru.svg"></a></li>
+				<li class="menu-text"><a href="?lang=by"><img class="img-flag" src="../img/4x3/by.svg"></a></li>
 			</ul>
 		</div>
 	</div>

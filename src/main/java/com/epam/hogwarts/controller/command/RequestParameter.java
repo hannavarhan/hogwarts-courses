@@ -16,6 +16,9 @@ public class RequestParameter {
     public static final String COURSE_DESCRIPTION = "course_description";
     public static final String COURSE_CONCLUSION = "course_conclusion";
     public static final String COURSE_ICON = "course_icon";
+    public static final String COURSE_ID = "course_id";
+
+    public static final String PROFESSOR_ID = "professor_id";
 
     public static final String THEORY_TEXT = "theory_text";
 

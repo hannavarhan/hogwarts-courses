@@ -67,4 +67,14 @@ public class CourseServiceImpl implements CourseService {
             throw new ServiceException("Can't save course");
         }
     }
+
+    @Override
+    public boolean deleteCourse(long courseId) throws ServiceException {
+        try {
+            return courseDao.updateCourseActual(courseId, false);
+        } catch (DaoException e) {
+            logger.error("Error {} in deleteCourse", e.getMessage());
+            throw new ServiceException("Can't delete course");
+        }
+    }
 }

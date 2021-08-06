@@ -42,7 +42,7 @@ public class VerifyTokenCommand implements Command {
             logger.error("Error {} while calling updateUser method", e.getMessage());
             return new CommandResult(PagePath.ERROR_PAGE, CommandResult.RoutingType.FORWARD);
         }
-        request.setAttribute(RequestAttribute.USER, user);
+        session.setAttribute(SessionAttribute.USER, user);
         return new CommandResult(PagePath.PUPIL_PERSONAL_PAGE, CommandResult.RoutingType.REDIRECT);
     }
 }

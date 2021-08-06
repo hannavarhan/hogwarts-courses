@@ -6,12 +6,13 @@ public class RequestAttribute {
     public static final String EMAIL_NOT_CONFIRMED = "email_not_confirmed";
     public static final String ROLE = "role";
     public static final String COURSE_LIST = "course_list";
+    public static final String PROFESSOR_LIST = "professor_list";
 
     public static final String THEORIES = "theories";
     public static final String QUESTIONS = "questions";
     public static final String ANSWERS = "answers";
     public static final String QUESTION_WITH_ANSWERS = "answers";
-
+    public static final String USER = "user"; //todo ?????
 
 
     private RequestAttribute() {

@@ -51,10 +51,10 @@ public class LoginCommand implements Command {
         session.setAttribute(SessionAttribute.USER_ROLE, userRole);
         switch (userRole) {
             case ADMIN -> {
-                return new CommandResult(PagePath.ADMIN_PERSONAL_PAGE, CommandResult.RoutingType.REDIRECT);
+                return new CommandResult(PagePath.GO_TO_ADMIN_PERSONAL_PAGE, CommandResult.RoutingType.REDIRECT);
             }
             case PUPIL -> {
-                return new CommandResult(PagePath.PUPIL_PERSONAL_PAGE, CommandResult.RoutingType.REDIRECT);
+                return new CommandResult(PagePath.GO_TO_PUPIL_PERSONAL_PAGE, CommandResult.RoutingType.REDIRECT);
             }
             case PROFESSOR -> {
                 return new CommandResult(PagePath.PROFESSOR_PERSONAL_PAGE, CommandResult.RoutingType.REDIRECT);

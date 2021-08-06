@@ -18,6 +18,12 @@ public class CommandProvider {
         commands.put(START_PAGE, new StartPageCommand());
         commands.put(GO_TO_LOGIN_PAGE, new GoToLoginPageCommand());
         commands.put(GO_TO_REGISTER_PAGE, new GoToRegisterPageCommand());
+        commands.put(GO_TO_ADMIN_PAGE, new GoToAdminPersonalPageCommand());
+        commands.put(GO_TO_REGISTER_PROFESSOR_PAGE, new GoToRegisterProfessorPage());
+        commands.put(GO_TO_EDIT_PROFESSOR_PAGE, new GoToEditProfessorPageCommand());
+        commands.put(DELETE_COURSE, new DeleteCourseCommand());
+        commands.put(DELETE_PROFESSOR, new DeleteProfessorCommand());
+        commands.put(REGISTER_PROFESSOR, new RegisterProfessorCommand());
         /*commands.put(LOGOUT, new LogoutCommand());
         commands.put(PERSONAL_PAGE, new PersonalPageCommand());
         commands.put(DEFAULT, new DefaultCommand());

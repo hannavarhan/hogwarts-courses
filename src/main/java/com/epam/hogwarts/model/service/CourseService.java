@@ -12,4 +12,6 @@ public interface CourseService {
     List<Course> getActualCourses(int limit) throws ServiceException;
 
     Optional<Course> saveCourse(Course course, ArrayList<Theory> theories, ArrayList<QuestionWithAnswers> questions) throws ServiceException;
+
+    boolean deleteCourse(long courseId) throws ServiceException;
 }

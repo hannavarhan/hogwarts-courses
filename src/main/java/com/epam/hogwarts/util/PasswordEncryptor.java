@@ -5,10 +5,14 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
+
+import static javax.xml.crypto.dsig.Transform.BASE64;
 
 public class PasswordEncryptor {
     private static final PasswordEncryptor instance = new PasswordEncryptor();
@@ -17,6 +21,7 @@ public class PasswordEncryptor {
     private String  algorithm;
     // Create key and cipher
     private Cipher cipher;
+    Base64.Encoder encoder = Base64.getEncoder();
 
     private PasswordEncryptor() {
         key = SystemProperties.getSecurityKey();
@@ -37,8 +42,8 @@ public class PasswordEncryptor {
         String result = null;
         try {
             cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-            byte[] encrypted = cipher.doFinal(password.getBytes());
-            result = new String(encrypted, StandardCharsets.UTF_8);
+            byte[] encrypted = cipher.doFinal(password.getBytes(StandardCharsets.UTF_8));
+            result = encoder.encodeToString(password.getBytes(StandardCharsets.UTF_8));
         } catch (InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
             e.printStackTrace();
         }
