@@ -82,19 +82,19 @@
                     <select onchange="showCourses(this)">
                         <!--В зависимости от параметра ставь selected в option с данным названием-->
                         <c:choose>
-                            <c:when test="${active_course_list}">
-                                <option selected value="unfinished">Unfinished</option>
-                                <option value="unpatched">Unpatched</option>
-                                <option value="finished">Finished</option>
-                            </c:when>
-                            <c:when test="${finished_course_list}">
+                            <c:when test="${param.course_list_type == 'finished'}">
                                 <option value="unfinished">Unfinished</option>
-                                <option value="unpatched">Unpatched</option>
+                                <option value="all">All</option>
                                 <option selected value="finished">Finished</option>
                             </c:when>
-                            <c:when test="${all_course_list}">
+                            <c:when test="${param.course_list_type == 'all'}">
                                 <option value="unfinished">Unfinished</option>
-                                <option selected value="unpatched">Unpatched</option>
+                                <option selected value="all">All</option>
+                                <option value="finished">Finished</option>
+                            </c:when>
+                            <c:when test="${param.course_list_type == 'unfinished'}">
+                                <option selected value="unfinished">Unfinished</option>
+                                <option value="all">All</option>
                                 <option value="finished">Finished</option>
                             </c:when>
                         </c:choose>
@@ -104,48 +104,40 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="course" items="${course_list}" begin="0" end="3">
-            <tr>
-                <td>${course.name}</td>
-                <c:choose>
-                    <c:when test="${active_course_list}">
-                        <td>
-                            <form>
-                                <input hidden name="course_id" id="course_to_study_id"
-                                       value="${course.entityId}"/>
-                                <button class="hollow button edit"
-                                        formaction="${pageContext.request.contextPath}/controller?command=go_to_study_course_page"
-                                        formmethod="post">Study
-                                </button>
-                            </form>
-                        </td>
-                    </c:when>
-                    <c:when test="${finished_course_list}">
-                        <td>
-                            <form>
-                                <input hidden name="course_id" id="finished_course_id"
-                                       value="${course.entityId}"/>
-                                <button class="hollow button edit"
-                                        formaction="${pageContext.request.contextPath}/controller?command=go_to_course_page"
-                                        formmethod="post">Open
-                                </button>
-                            </form>
-                        </td>
-                    </c:when>
-                    <c:when test="${all_course_list}">
-                        <td>
-                            <form>
-                                <input hidden name="course_id" id="course_id"
-                                       value="${course.entityId}"/>
-                                <button class="hollow button edit"
-                                        formaction="${pageContext.request.contextPath}/controller?command=go_to_course_page"
-                                        formmethod="post">Open
-                                </button>
-                            </form>
-                        </td>
-                    </c:when>
-                </c:choose>
-            </tr>
+            <c:forEach var="course" items="${course_list}" begin="0" end="10">
+                <tr>
+                    <td>${course.name}</td>
+                    <td>
+                        <form>
+                            <c:choose>
+                                <c:when test="${param.course_list_type == 'unfinished'}">
+                                    <input hidden name="course_id" id="course_to_study_id"
+                                           value="${course.entityId}"/>
+                                    <button class="hollow button edit"
+                                            formaction="${pageContext.request.contextPath}/controller?command=go_to_study_course_page"
+                                            formmethod="post">Study
+                                    </button>
+                                </c:when>
+                                <c:when test="${param.course_list_type == 'finished'}">
+                                    <input hidden name="course_id" id="finished_course_id"
+                                           value="${course.entityId}"/>
+                                    <button class="hollow button edit"
+                                            formaction="${pageContext.request.contextPath}/controller?command=go_to_course_page"
+                                            formmethod="post">Open
+                                    </button>
+                                </c:when>
+                                <c:when test="${param.course_list_type == 'all'}">
+                                    <input hidden name="course_id" id="course_id"
+                                           value="${course.entityId}"/>
+                                    <button class="hollow button edit"
+                                            formaction="${pageContext.request.contextPath}/controller?command=go_to_course_page"
+                                            formmethod="post">Open
+                                    </button>
+                                </c:when>
+                            </c:choose>
+                        </form>
+                    </td>
+                </tr>
             </c:forEach>
             </tbody>
         </table>
@@ -176,7 +168,7 @@
     function showCourses(select) {
         if (select instanceof HTMLSelectElement) {
             let url = new URL(window.location.href)
-            url.searchParams.set("course", select.value)
+            url.searchParams.set("course_list_type", select.value)
             window.location.href = url.href
         }
     }

@@ -20,6 +20,7 @@ public class CommandProvider {
         commands.put(GO_TO_REGISTER_PAGE, new GoToRegisterPageCommand());
         commands.put(GO_TO_PUPIL_PAGE, new GoToPupilPersonalPageCommand());
         commands.put(GO_TO_ADMIN_PAGE, new GoToAdminPersonalPageCommand());
+        commands.put(GO_TO_COURSE_PAGE, new GoToCoursePageCommand());
         commands.put(GO_TO_REGISTER_PROFESSOR_PAGE, new GoToRegisterProfessorPage());
         commands.put(GO_TO_EDIT_PROFESSOR_PAGE, new GoToEditProfessorPageCommand());
         commands.put(DELETE_COURSE, new DeleteCourseCommand());

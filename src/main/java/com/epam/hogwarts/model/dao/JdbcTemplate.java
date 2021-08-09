@@ -80,6 +80,21 @@ public class JdbcTemplate<T extends AbstractEntity> {
         return result;
     }
 
+    public int count(String sql, Object... objects) throws DaoException {
+        int result = 0;
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            setObjectsToStatement(statement, objects);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                result = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Can't handle count request", e);
+        }
+        return result;
+    }
+
     private void setObjectsToStatement(PreparedStatement statement, Object... objects) throws SQLException {
         for (int i = 0; i < objects.length; i++) {
             statement.setObject(i+1, objects[i]);

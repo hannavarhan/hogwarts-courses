@@ -24,15 +24,32 @@ public class GoToPupilPersonalPageCommand implements Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.USER);
         long userId = user.getEntityId();
-        List<Course> activeCourses;
+        List<Course> courses;
         try {
-            activeCourses = service.getUserCoursesByStatus(userId, CourseStatus.ACTIVE);
-            request.setAttribute(RequestAttribute.ACTIVE_COURSE_LIST, true);
-            request.setAttribute(RequestAttribute.ALL_COURSE_LIST, false);
-            request.setAttribute(RequestAttribute.FINISHED_COURSE_LIST, false);
-            request.setAttribute(RequestAttribute.COURSE_LIST, activeCourses);
-            logger.info("Pupil (id:{}) active courses: {}", userId, activeCourses);
-            return new CommandResult(PagePath.PUPIL_PERSONAL_PAGE, CommandResult.RoutingType.FORWARD);
+            String courseListTypeString = request.getParameter(RequestParameter.COURSE_LIST_TYPE);
+            RequestParameter.CourseListType courseListType = courseListTypeString == null ?
+                    RequestParameter.CourseListType.UNFINISHED :
+                    RequestParameter.CourseListType.valueOf(courseListTypeString.toUpperCase());
+            switch (courseListType) {
+                case FINISHED -> {
+                    courses = service.getUserCoursesByStatus(userId, CourseStatus.FINISHED);
+                    request.setAttribute(RequestAttribute.COURSE_LIST, courses);
+                    logger.info("Pupil (id:{}) finished courses: {}", userId, courses);
+                    return new CommandResult(PagePath.PUPIL_PERSONAL_PAGE, CommandResult.RoutingType.FORWARD);
+                }
+                case ALL -> {
+                    courses = service.getNotUserCourses(userId);
+                    request.setAttribute(RequestAttribute.COURSE_LIST, courses);
+                    logger.info("Pupil (id:{}) not started courses: {}", userId, courses);
+                    return new CommandResult(PagePath.PUPIL_PERSONAL_PAGE, CommandResult.RoutingType.FORWARD);
+                }
+                default -> {
+                    courses = service.getUserCoursesByStatus(userId, CourseStatus.IN_PROGRESS);
+                    request.setAttribute(RequestAttribute.COURSE_LIST, courses);
+                    logger.info("Pupil (id:{}) active courses: {}", userId, courses);
+                    return new CommandResult(PagePath.PUPIL_PERSONAL_PAGE, CommandResult.RoutingType.FORWARD);
+                }
+            }
         } catch (ServiceException e) {
             logger.error("Can't get active courses for user with id {}", userId);
             return new CommandResult(PagePath.ERROR_PAGE, CommandResult.RoutingType.REDIRECT);

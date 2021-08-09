@@ -1,16 +1,18 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="css/foundation.css" />
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../css/foundation.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title></title>
 </head>
 
-<body style="background-image: url('img/pexels-photo-7978770.jpeg');">
+<body style="background-image: url('../img/pexels-photo-7978770.jpeg');">
 
 <div class="top-bar">
     <div class="top-bar-left">
@@ -23,11 +25,11 @@
             <li class="menu-text" style="color: white;">cuteAndrei24</li>
             <li class="menu-text"><a href="#" class="button">Log out</a></li>
             <li class="menu-text"><a onclick="setLang('en')" href="#"><img class="img-flag"
-                                                                           src="img/4x3/gb.svg"></a></li>
+                                                                           src="../img/4x3/gb.svg"></a></li>
             <li class="menu-text"><a onclick="setLang('ru')" href="#"><img class="img-flag"
-                                                                           src="img/4x3/ru.svg"></a></li>
+                                                                           src="../img/4x3/ru.svg"></a></li>
             <li class="menu-text"><a onclick="setLang('by')" href="#"><img class="img-flag"
-                                                                           src="img/4x3/by.svg"></a></li>
+                                                                           src="../img/4x3/by.svg"></a></li>
         </ul>
     </div>
 </div>
@@ -42,28 +44,28 @@
         <table class="text-center usertable" style="border-radius: 3px; margin: 0 40px;">
             <thead>
             <tr>
-                <th colspan="2" class="text-center">User:${username}</th>
+                <th colspan="2" class="text-center">User:${sessionScope.user.login}</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td colspan="2"><img src="img/avatar.png"> </td>
+                <td colspan="2"><img src="../img/avatar.png"></td>
             </tr>
             <tr>
                 <td>User rating</td>
-                <td>5.0</td>
+                <td>${sessionScope.user.rating}</td>
             </tr>
             <tr>
                 <td>Name</td>
-                <td>Hanna</td>
+                <td>${sessionScope.user.name}</td>
             </tr>
             <tr>
                 <td>Surname</td>
-                <td>Hanna</td>
+                <td>${sessionScope.user.surname}</td>
             </tr>
             <tr>
                 <td>Email</td>
-                <td>hanna@gmail.com</td>
+                <td>${sessionScope.user.email}</td>
             </tr>
 
             </tbody>
@@ -81,47 +83,30 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Hanna</td>
-                <td><button class="hollow alert button edit" href="#">Delete</button></td>
-                <td><button class="hollow button edit" href="#">Open</button></td>
-            </tr>
-            <tr>
-                <td>Hanna</td>
-                <td>Vorgan</td>
-                <td><button class="hollow button edit" href="#">Edit</button></td>
-            </tr>
-            <tr>
-                <td>Hanna</td>
-                <td>Vorgan</td>
-                <td><button class="hollow button edit" href="#">Edit</button></td>
-            </tr>
-            <tr>
-                <td>Hanna</td>
-                <td>Vorgan</td>
-                <td><button class="hollow button edit" href="#">Edit</button></td>
-
-            </tr>
-            <tr>
-                <td>Hanna</td>
-                <td>Vorgan</td>
-                <td><button class="hollow button edit" href="#">Edit</button></td>
-            </tr>
-            <tr>
-                <td>Hanna</td>
-                <td>Vorgan</td>
-                <td><button class="hollow button edit" href="#">Edit</button></td>
-            </tr>
-            <tr>
-                <td>Hanna</td>
-                <td>Vorgan</td>
-                <td><button class="hollow button edit" href="#">Edit</button></td>
-            </tr>
-            <tr>
-                <td>Hanna</td>
-                <td>Vorgan</td>
-                <td><button class="hollow button edit" href="#">Edit</button></td>
-            </tr>
+            <c:forEach var="course" items="${course_list}" begin="0" end="3">
+                <tr>
+                    <td>${course.name}</td>
+                    <td>
+                        <form>
+                            <input hidden name="course_id" id="course_to_delete_id"
+                                   value="${course.entityId}"/>
+                            <button class="hollow alert button edit"
+                                    formaction="${pageContext.request.contextPath}/controller?command=delete_course"
+                                    formmethod="post">Delete
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form>
+                            <input hidden name="course_id" id="course_to_open_id"
+                                   value="${course.entityId}"/>
+                            <button class="hollow alert button edit"
+                                    formaction="${pageContext.request.contextPath}/controller?command=open_course"
+                                    formmethod="post">Open</button>
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
 
@@ -140,8 +125,8 @@
         </div>
         <hr>
         <div class="grid-x align-center text-center grid-margin-x">
-            <div class="cell small-4 telegram">Telegram <a href="#"><img src="img/telegram_icon.svg"
-                                                                         width="25px"></a> </div>
+            <div class="cell small-4 telegram">Telegram <a href="#"><img src="../img/telegram_icon.svg"
+                                                                         width="25px"></a></div>
             <div class="cell small-4 rights ">All rights reserved.</div>
             <div class="cell small-4">Have a question? You can phone +375 29 784 1845.</div>
         </div>

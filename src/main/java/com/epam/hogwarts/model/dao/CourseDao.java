@@ -16,5 +16,7 @@ public interface CourseDao extends BaseDao<Course> {
 
     List<Course> findCoursesByUserAndStatus(long userId, CourseStatus userStatus) throws DaoException;
 
+    List<Course> findCoursesExcludingUser(long userId) throws DaoException;
+
     boolean updateCourseActual(long courseId, boolean isActual) throws DaoException;
 }

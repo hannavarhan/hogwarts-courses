@@ -21,6 +21,8 @@ public class RequestParameter {
     public static final String PROFESSOR_ID = "professor_id";
     public static final String PROFESSOR_OLD_LOGIN = "professor_old_login";
 
+    public static final String COURSE_LIST_TYPE = "course_list_type";
+
     public static final String THEORY_TEXT = "theory_text";
 
     public static final String QUESTION_TEXT = "question_text";
@@ -30,5 +32,11 @@ public class RequestParameter {
 
 
     private RequestParameter() {
+    }
+
+    public enum CourseListType {
+        FINISHED,
+        ALL,
+        UNFINISHED
     }
 }

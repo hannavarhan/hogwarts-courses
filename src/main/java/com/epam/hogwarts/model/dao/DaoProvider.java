@@ -9,6 +9,7 @@ public class DaoProvider {
     private static final TheoryDao theoryDao = TheoryDaoImpl.getInstance();
     private static final QuestionDao questionDao = QuestionDaoImpl.getInstance();
     private static final AnswerDao answerDao = AnswerDaoImpl.getInstance();
+    private static final FeedbackDao feedbackDao = FeedbackDaoImpl.getInstance();
 
     private DaoProvider() {}
 
@@ -34,6 +35,10 @@ public class DaoProvider {
 
     public AnswerDao getAnswerDao() {
         return answerDao;
+    }
+
+    public FeedbackDao getFeedbackDao() {
+        return feedbackDao;
     }
 
 

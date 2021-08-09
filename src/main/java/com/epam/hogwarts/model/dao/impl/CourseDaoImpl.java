@@ -67,6 +67,15 @@ public class CourseDaoImpl implements CourseDao {
             "(SELECT course_statuses.id_course_status FROM course_statuses WHERE course_statuses.status_name=?)" +
             "where pupil_courses.id_pupil=?;";
 
+    private static final String SQL_SELECT_COURSES_EXCLUDE_USER = "SELECT c.id_course, id_professor, c.name, " +
+            "c.rating, complexity, creation_date, " +
+            "is_actual, description, conclusion, icon " +
+            "FROM hogwarts_courses.courses c " +
+            "INNER JOIN pupil_courses " +
+            "ON pupil_courses.id_course != c.id_course " +
+            "WHERE pupil_courses.id_pupil=? " +
+            "GROUP BY c.id_course;";
+
     private static final String SQL_UPDATE_IS_ACTUAL = "UPDATE hogwarts_courses.courses SET " +
             "is_actual=? " +
             "WHERE id_course=?;";
@@ -141,6 +150,13 @@ public class CourseDaoImpl implements CourseDao {
     public List<Course> findCoursesByUserAndStatus(long userId, CourseStatus courseStatus) throws DaoException {
         List<Course> result = jdbcTemplate.queryForList(SQL_SELECT_COURSES_BY_USER_ID_AND_STATUS,
                 new CourseMapper(), courseStatus.name().toLowerCase(), userId);
+        return result;
+    }
+
+    @Override
+    public List<Course> findCoursesExcludingUser(long userId) throws DaoException {
+        List<Course> result = jdbcTemplate.queryForList(SQL_SELECT_COURSES_EXCLUDE_USER,
+                new CourseMapper(), userId);
         return result;
     }
 

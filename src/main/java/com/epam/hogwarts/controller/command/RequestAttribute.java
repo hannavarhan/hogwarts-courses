@@ -8,10 +8,10 @@ public class RequestAttribute {
     public static final String COURSE_LIST = "course_list";
     public static final String PROFESSOR_LIST = "professor_list";
     public static final String PROFESSOR = "professor";
+    public static final String COURSE = "course";
+    public static final String FEEDBACK_LIST = "feedback_list";
+    public static final String FEEDBACK_LIST_SIZE = "feedback_list_size";
 
-    public static final String ACTIVE_COURSE_LIST = "active_course_list";
-    public static final String FINISHED_COURSE_LIST = "finished_course_list";
-    public static final String ALL_COURSE_LIST = "all_course_list";
 
     public static final String THEORIES = "theories";
     public static final String QUESTIONS = "questions";

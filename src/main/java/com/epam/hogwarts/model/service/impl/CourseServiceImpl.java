@@ -87,4 +87,26 @@ public class CourseServiceImpl implements CourseService {
             throw new ServiceException("Can't get user courses");
         }
     }
+
+    @Override
+    public List<Course> getNotUserCourses(long userId) throws ServiceException {
+        try {
+            List<Course> result = courseDao.findCoursesExcludingUser(userId);
+            return  result;
+        } catch (DaoException e) {
+            logger.error("Error {} in getUserCoursesByStatus", e.getMessage());
+            throw new ServiceException("Can't get user courses");
+        }
+    }
+
+    @Override
+    public Optional<Course> findCourseById(long courseId) throws ServiceException {
+        try {
+            Optional<Course> result = courseDao.findById(courseId);
+            return  result;
+        } catch (DaoException e) {
+            logger.error("Error {} in findCourseById with id {}", e.getMessage(), courseId);
+            throw new ServiceException("Can't get user courses");
+        }
+    }
 }

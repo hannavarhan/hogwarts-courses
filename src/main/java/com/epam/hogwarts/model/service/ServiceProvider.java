@@ -1,9 +1,6 @@
 package com.epam.hogwarts.model.service;
 
-import com.epam.hogwarts.model.service.impl.CourseServiceImpl;
-import com.epam.hogwarts.model.service.impl.EmailNotificationSenderServiceImpl;
-import com.epam.hogwarts.model.service.impl.TelegramNotificationSenderServiceImpl;
-import com.epam.hogwarts.model.service.impl.UserServiceImpl;
+import com.epam.hogwarts.model.service.impl.*;
 
 public class ServiceProvider {
     private static final ServiceProvider instance = new ServiceProvider();
@@ -11,6 +8,7 @@ public class ServiceProvider {
     private static final CourseService courseService = new CourseServiceImpl();
     private static final EmailNotificationSenderService emailService = new EmailNotificationSenderServiceImpl();
     private static final TelegramNotificationSenderService telegramService = new TelegramNotificationSenderServiceImpl();
+    private static final FeedbackService feedbackService = new FeedbackServiceImpl();
 
     private ServiceProvider() {}
 
@@ -32,5 +30,9 @@ public class ServiceProvider {
 
     public TelegramNotificationSenderService getTelegramService() {
         return telegramService;
+    }
+
+    public FeedbackService getFeedbackService() {
+        return feedbackService;
     }
 }

@@ -16,4 +16,8 @@ public interface CourseService {
     boolean deleteCourse(long courseId) throws ServiceException;
 
     List<Course> getUserCoursesByStatus(long userId, CourseStatus userStatus) throws ServiceException;
+
+    List<Course> getNotUserCourses(long userId) throws ServiceException;
+
+    Optional<Course> findCourseById(long courseId) throws ServiceException;
 }

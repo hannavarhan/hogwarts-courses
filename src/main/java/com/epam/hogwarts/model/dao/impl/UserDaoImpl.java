@@ -37,11 +37,11 @@ public class UserDaoImpl implements UserDao {
             "JOIN rating ON users.rating IN (rating.lower_bound, rating.upper_bound) " +
             "WHERE id_user = ?;";
 
-    private static final String SQL_INSERT_USER = "INSERT INTO users (login, password, id_role, rating, " +
+    private static final String SQL_INSERT_USER = "INSERT INTO users (login, password, id_role, status, rating, " +
             "users.name, surname, email, avatar, about) " +
             "VALUES(?, ?,  " +
             "(SELECT id_role FROM roles WHERE role_name=?),  " +
-            "?, ?, ?, ?, ?, ?);";
+            "?, ?, ?, ?, ?, ?, ?);";
 
     private static final String SQL_UPDATE_USER = "UPDATE users  " +
             "SET login=?, " +
@@ -83,6 +83,7 @@ public class UserDaoImpl implements UserDao {
                 entity.getPassword(),
                 entity.getRole().getTitle(),
                 entity.getRatingDouble(),
+                entity.getStatus().name().toLowerCase(),
                 entity.getName(),
                 entity.getSurname(),
                 entity.getEmail(),

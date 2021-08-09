@@ -33,7 +33,7 @@ public class ColumnName {
     public static final String ANSWER_IS_CORRECT = "is_correct";
 
     /* feedback table */
-    public static final String FEEDBACK_ID = "id";
+    public static final String FEEDBACK_ID = "id_feedback";
     public static final String FEEDBACK_COMMENT = "comment";
     public static final String FEEDBACK_ESTIMATOR = "estimator";
     public static final String FEEDBACK_COURSE_ID = "id_course";

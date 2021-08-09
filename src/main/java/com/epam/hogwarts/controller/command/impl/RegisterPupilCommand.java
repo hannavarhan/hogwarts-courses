@@ -6,6 +6,7 @@ import com.epam.hogwarts.exception.ServiceException;
 import com.epam.hogwarts.model.entity.EmailNotification;
 import com.epam.hogwarts.model.entity.User;
 import com.epam.hogwarts.model.entity.UserRole;
+import com.epam.hogwarts.model.entity.UserStatus;
 import com.epam.hogwarts.model.service.EmailNotificationSenderService;
 import com.epam.hogwarts.model.service.ServiceProvider;
 import com.epam.hogwarts.model.service.UserService;
@@ -66,6 +67,7 @@ public class RegisterPupilCommand implements Command {
                 .setEmail(email)
                 .setAbout(about)
                 .setRole(UserRole.PUPIL)
+                .setStatus(UserStatus.NOT_CONFIRMED)
                 .build();
         Optional<User> userResult;
         try {
