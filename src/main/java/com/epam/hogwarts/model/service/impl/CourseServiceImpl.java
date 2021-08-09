@@ -1,9 +1,9 @@
 package com.epam.hogwarts.model.service.impl;
 
-import com.epam.hogwarts.model.dao.*;
-import com.epam.hogwarts.model.entity.*;
 import com.epam.hogwarts.exception.DaoException;
 import com.epam.hogwarts.exception.ServiceException;
+import com.epam.hogwarts.model.dao.*;
+import com.epam.hogwarts.model.entity.*;
 import com.epam.hogwarts.model.service.CourseService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class CourseServiceImpl implements CourseService {
     private static final DaoProvider daoProvider = DaoProvider.getInstance();
@@ -75,6 +74,17 @@ public class CourseServiceImpl implements CourseService {
         } catch (DaoException e) {
             logger.error("Error {} in deleteCourse", e.getMessage());
             throw new ServiceException("Can't delete course");
+        }
+    }
+
+    @Override
+    public List<Course> getUserCoursesByStatus(long userId, CourseStatus userStatus) throws ServiceException {
+        try {
+            List<Course> result = courseDao.findCoursesByUserAndStatus(userId, userStatus);
+            return  result;
+        } catch (DaoException e) {
+            logger.error("Error {} in getUserCoursesByStatus", e.getMessage());
+            throw new ServiceException("Can't get user courses");
         }
     }
 }

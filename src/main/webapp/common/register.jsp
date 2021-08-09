@@ -56,7 +56,7 @@
 					<div class="small-2"></div>
 					<div class="small-4 cell">
 						<label class="login-page">Login
-							<input style=" border-radius: 3px;" type="text" required  id="login" name="login" pattern="[A-z]+([A-z]|[0-9])*">
+							<input style=" border-radius: 3px;" type="text" required id="login" name="login" pattern="[A-z]+([A-z]|[0-9])*">
 						</label>
 					</div>
 					<div class="small-2"></div>
@@ -69,13 +69,13 @@
 				<div class="grid-x  align-justify">
 					<div class="small-4 cell">
 						<label class="login-page">Name
-							<input style=" border-radius: 3px;" type="text" required id="user_name" name="user_name" pattern="[A-z]+" minlength="2">
+							<input style=" border-radius: 3px;" type="text" required id="user_name" name="user_name" pattern="([A-z]|[А-я])+" minlength="2">
 						</label>
 					</div>
 					<div class="small-2 cell"></div>
 					<div class="small-4 cell">
 						<label class="login-page">Surname
-							<input style=" border-radius: 3px;" type="text" required id="user_surname" name="user_surname" pattern="[A-z]+" minlength="2">
+							<input style=" border-radius: 3px;" type="text" required id="user_surname" name="user_surname" pattern="([A-z]|[А-я])+" minlength="2">
 						</label>
 					</div>
 					<div class="small-2 cell"></div>

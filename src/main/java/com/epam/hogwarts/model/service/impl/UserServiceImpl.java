@@ -103,4 +103,15 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("Error while getActualProfessors", e);
         }
     }
+
+    @Override
+    public Optional<User> findUserById(long userId) throws ServiceException {
+        try {
+            Optional<User> user = userDao.findById(userId);
+            return user;
+        } catch (DaoException e) {
+            logger.error("Error in findUserById");
+            throw new ServiceException("Error while findUserById", e);
+        }
+    }
 }

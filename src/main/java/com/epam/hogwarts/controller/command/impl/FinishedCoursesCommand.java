@@ -14,8 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class GoToPupilPersonalPageCommand implements Command {
-
+public class FinishedCoursesCommand implements Command {
     private static final Logger logger = LogManager.getLogger(GoToPupilPersonalPageCommand.class);
 
     @Override
@@ -24,17 +23,17 @@ public class GoToPupilPersonalPageCommand implements Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.USER);
         long userId = user.getEntityId();
-        List<Course> activeCourses;
+        List<Course> finishedCourses;
         try {
-            activeCourses = service.getUserCoursesByStatus(userId, CourseStatus.ACTIVE);
-            request.setAttribute(RequestAttribute.ACTIVE_COURSE_LIST, true);
+            finishedCourses = service.getUserCoursesByStatus(userId, CourseStatus.FINISHED);
+            request.setAttribute(RequestAttribute.ACTIVE_COURSE_LIST, false);
             request.setAttribute(RequestAttribute.ALL_COURSE_LIST, false);
-            request.setAttribute(RequestAttribute.FINISHED_COURSE_LIST, false);
-            request.setAttribute(RequestAttribute.COURSE_LIST, activeCourses);
-            logger.info("Pupil (id:{}) active courses: {}", userId, activeCourses);
+            request.setAttribute(RequestAttribute.FINISHED_COURSE_LIST, true);
+            request.setAttribute(RequestAttribute.COURSE_LIST, finishedCourses);
+            logger.info("Pupil (id:{}) finished courses: {}", userId, finishedCourses);
             return new CommandResult(PagePath.PUPIL_PERSONAL_PAGE, CommandResult.RoutingType.FORWARD);
         } catch (ServiceException e) {
-            logger.error("Can't get active courses for user with id {}", userId);
+            logger.error("Can't get finished courses for user with id {}", userId);
             return new CommandResult(PagePath.ERROR_PAGE, CommandResult.RoutingType.REDIRECT);
         }
     }

@@ -20,4 +20,6 @@ public interface UserService {
 
     List<User> getActualProfessors() throws ServiceException;
 
+    Optional<User> findUserById(long userId) throws ServiceException;
+
 }

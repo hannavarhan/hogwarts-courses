@@ -44,7 +44,8 @@ public class UserDaoImpl implements UserDao {
             "?, ?, ?, ?, ?, ?);";
 
     private static final String SQL_UPDATE_USER = "UPDATE users  " +
-            "SET password=?, " +
+            "SET login=?, " +
+            "password=?, " +
             "id_role=(SELECT id_role FROM roles WHERE role_name=?), " +
             "status=?, " +
             "rating=?, " +
@@ -94,6 +95,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public int update(User entity) throws DaoException {
         int result = jdbcTemplate.update(SQL_UPDATE_USER,
+                entity.getLogin(),
                 entity.getPassword(),
                 entity.getRole().getTitle(),
                 entity.getStatus().toString().toLowerCase(),

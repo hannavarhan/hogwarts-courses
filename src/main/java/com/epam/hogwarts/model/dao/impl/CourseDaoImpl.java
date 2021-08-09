@@ -1,9 +1,10 @@
 package com.epam.hogwarts.model.dao.impl;
 
+import com.epam.hogwarts.exception.DaoException;
 import com.epam.hogwarts.model.dao.CourseDao;
 import com.epam.hogwarts.model.dao.JdbcTemplate;
 import com.epam.hogwarts.model.entity.Course;
-import com.epam.hogwarts.exception.DaoException;
+import com.epam.hogwarts.model.entity.CourseStatus;
 import com.epam.hogwarts.model.mapper.impl.CourseMapper;
 import com.epam.hogwarts.model.pool.ConnectionPool;
 
@@ -55,6 +56,16 @@ public class CourseDaoImpl implements CourseDao {
             "is_actual, description, conclusion, icon " +
             "FROM hogwarts_courses.courses " +
             "WHERE id_professor=?";
+
+    private static final String SQL_SELECT_COURSES_BY_USER_ID_AND_STATUS = "SELECT c.id_course, id_professor, c.name, " +
+            "c.rating, complexity, creation_date, " +
+            "is_actual, description, conclusion, icon " +
+            "FROM hogwarts_courses.courses c " +
+            "INNER JOIN pupil_courses " +
+            "ON pupil_courses.id_course=c.id_course " +
+            "AND pupil_courses.id_course_status= " +
+            "(SELECT course_statuses.id_course_status FROM course_statuses WHERE course_statuses.status_name=?)" +
+            "where pupil_courses.id_pupil=?;";
 
     private static final String SQL_UPDATE_IS_ACTUAL = "UPDATE hogwarts_courses.courses SET " +
             "is_actual=? " +
@@ -123,6 +134,13 @@ public class CourseDaoImpl implements CourseDao {
     @Override
     public List<Course> findCoursesByProfessor(long professorId) throws DaoException {
         List<Course> result = jdbcTemplate.queryForList(SQL_SELECT_COURSES_BY_PROFESSOR, new CourseMapper(), professorId);
+        return result;
+    }
+
+    @Override
+    public List<Course> findCoursesByUserAndStatus(long userId, CourseStatus courseStatus) throws DaoException {
+        List<Course> result = jdbcTemplate.queryForList(SQL_SELECT_COURSES_BY_USER_ID_AND_STATUS,
+                new CourseMapper(), courseStatus.name().toLowerCase(), userId);
         return result;
     }
 

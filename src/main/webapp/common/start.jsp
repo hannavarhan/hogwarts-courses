@@ -10,6 +10,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
 	<title></title>
 </head>
 
@@ -42,11 +43,11 @@
 		<div style="padding-top: 10px;" class="cell align-center"></div>
 		<div class="slideshow-container">
 			<div class="slide fade">
-				<img src="img/WIZARD SCHOOL.svg" style="width: 900px; height: 240px;" class="slide-img">
+				<img src="../img/WIZARD SCHOOL.svg" style="width: 900px; height: 240px;" class="slide-img">
 				<div class="text">Best teachers</div>
 			</div>
 			<div class="slide fade">
-				<img src="img/telegram_icon.svg" class="slide-img">
+				<img src="../img/telegram_icon.svg" class="slide-img">
 				<div class="text">Caption Two</div>
 			</div>
 			<div class="slide fade">
@@ -84,7 +85,7 @@
 								<div class="cell small-1">
 									<div class="rating-mini">
 										<span class="active material-icons-outlined">
-												star
+											star
 											</span>
 										<span class="active material-icons-outlined">
 												grade

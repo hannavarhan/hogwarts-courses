@@ -49,8 +49,9 @@
                 </p>
             </div>
             <div class="cell text-left large-offset-1 small-3">
-                <label class="login-page">Password
-                <input class="login-input" type="password" id="password"  name="password" aria-describedby="passwordHelpText">
+                <label class="login-page">
+                    Password
+                <input style="width: 85%; border-radius: 3px; padding-left: 0;" class="login-input" type="password" id="password"  name="password" aria-describedby="passwordHelpText">
                 </label>
                 <p class="help-text" style="font-family: SofiaProLight;" id="passwordHelpText">Your password must
                     have at least 10 characters, a number.

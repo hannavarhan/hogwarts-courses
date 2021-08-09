@@ -33,7 +33,7 @@ public class CreateCourseCommand implements Command {
             courseService.saveCourse(course, theories, questionsWithAnswers);
         } catch (ServiceException e) {
             logger.error("Can't save course {}", course);
-            return new CommandResult(PagePath.ERROR_PAGE, CommandResult.RoutingType.FORWARD);
+            return new CommandResult(PagePath.ERROR_PAGE, CommandResult.RoutingType.REDIRECT);
         }
         return new CommandResult(PagePath.PROFESSOR_PERSONAL_PAGE, CommandResult.RoutingType.REDIRECT);
     }

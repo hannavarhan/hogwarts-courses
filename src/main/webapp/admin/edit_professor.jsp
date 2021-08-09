@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
    <meta charset="utf-8">
-   <link rel="stylesheet" type="text/css" href="css/foundation.css" />
-   <link rel="stylesheet" type="text/css" href="css/styles.css" />
+   <link rel="stylesheet" type="text/css" href="../css/foundation.css" />
+   <link rel="stylesheet" type="text/css" href="../css/styles.css" />
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    <title></title>
@@ -34,14 +34,22 @@
 <div class="grid-container"
      style="background-color: white; border-radius: 6px ; width: 50%; box-shadow: inset 0 0 30px;">
    <div class="grid-y  align-center  text-center" style="height: 800px; margin: 10px 0;">
-      <form method="POST">
+      <form method="POST" action="${pageContext.request.contextPath}/controller?command=edit_professor">
+         <input hidden name="professor_id" id="professor_id" value="${professor.entityId}"/>
+         <input hidden name="professor_old_login" id="professor_old_login" value="${professor.login}"/>
          <div class="cell text-left large-offset-1 small-1">
             <div class="grid-x">
-               <div class="small-10 cell">
+               <div class="small-4 cell">
                   <label class="login-page">
                      Teacher email
-                     <input style="border-radius: 3px; padding-left: 0;" type="email" required
-                            placeholder="fuckingfoundation@bicthes.com" aria-describedby="loginHelpText">
+                     <input style="border-radius: 3px; padding-left: 0;" type="text" required value="${professor.email}" id="email" name="email"
+                            aria-describedby="loginHelpText">
+                  </label>
+               </div>
+               <div class="small-2"></div>
+               <div class="small-4 cell">
+                  <label class="login-page">Login
+                     <input style=" border-radius: 3px;" type="text" required id="login" name="login" value="${professor.login}" pattern="[A-z]+([A-z]|[0-9])*">
                   </label>
                </div>
                <div class="small-2"></div>
@@ -52,13 +60,13 @@
             <div class="grid-x">
                <div class="small-4 cell">
                   <label class="login-page">Teacher firstname:
-                     <input style=" border-radius: 3px;" type="text" required pattern="[A-z]+" minlength="2">
+                     <input style=" border-radius: 3px;" type="text" required id="user_name" name="user_name" value="${professor.name}" pattern="([A-z]|[А-я])+" minlength="2">
                   </label>
                </div>
                <div class="small-2"></div>
                <div class="small-4 cell">
                   <label class="login-page">Teacher lastname:
-                     <input style=" border-radius: 3px;" type="text" required pattern="[A-z]+" minlength="2">
+                     <input style=" border-radius: 3px;" type="text" required id="user_surname" name="user_surname" value="${professor.surname}" pattern="([A-z]|[А-я])+" minlength="2">
                   </label>
                </div>
                <div class="small-2"></div>
@@ -69,8 +77,8 @@
             <div class="grid-x">
                <div class="small-10 cell">
                   <label class="login-page">Password
-                     <input class="login-input" id="password" required minlength="10" type="password"
-                            aria-describedby="passwordHelpText">
+                     <input class="login-input" id="password" required minlength="10" type="password" name="password"
+                            value="${professor.password}" aria-describedby="passwordHelpText">
                   </label>
                   <p class="help-text" style="font-family: SofiaProLight;" id="passwordHelpText">Your password
                      must
@@ -84,7 +92,8 @@
             <div class="grid-x">
                <div class="small-10 cell">
                   <label class="login-page">Repeat password
-                     <input id="repeatpassword" class="login-input" required minlength="10" type="password">
+                     <input class="login-input" id="repeat_password" required minlength="10" type="password" name="repeat_password"
+                            value="${professor.password}">
                   </label>
                </div>
                <div class="small-2"></div>
@@ -94,7 +103,7 @@
             <div class="grid-x">
                <div class="small-10 cell">
                   <label class="login-page">About
-                     <textarea style="border-radius: 3px;"></textarea>
+                     <textarea id="about" name="about" style="border-radius: 3px;">${professor.about}</textarea>
                   </label>
                </div>
                <div class="small-2"></div>
@@ -124,7 +133,7 @@
       </div>
       <hr>
       <div class="grid-x align-center text-center grid-margin-x">
-         <div class="cell small-4 telegram">Telegram <a href="#"><img src="img/telegram_icon.svg"
+         <div class="cell small-4 telegram">Telegram <a href="#"><img src="../img/telegram_icon.svg"
                                                                       width="25px"></a> </div>
          <div class="cell small-4 rights ">All rights reserved.</div>
          <div class="cell small-4">Have a question? You can phone +375 29 784 1845.</div>
@@ -136,7 +145,7 @@
 <script type="text/javascript">
    function checkPassword() {
       var password = document.getElementById("password");
-      var repeatPassword = document.getElementById("repeatpassword")
+      var repeatPassword = document.getElementById("repeat_password")
       if (password.value != repeatPassword.value) {
          repeatPassword.setCustomValidity("Passwords must be equals!")
       } else {
@@ -144,7 +153,7 @@
       }
    }
    window.onload = function () {
-      document.getElementById("repeatpassword").addEventListener('change', checkPassword, false)
+      document.getElementById("repeat_password").addEventListener('change', checkPassword, false)
    }
 
 </script>

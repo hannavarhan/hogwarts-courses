@@ -1,5 +1,7 @@
 package com.epam.hogwarts.model.entity;
 
+import java.util.Arrays;
+
 public class User extends AbstractEntity {
 
     //todo: can we describe fields as final to guarantee immutability??
@@ -105,6 +107,24 @@ public class User extends AbstractEntity {
         result += 31 * result + name.hashCode();
         result += 31 * result + surname.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append("login='").append(login).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", role=").append(role);
+        sb.append(", status=").append(status);
+        sb.append(", rating='").append(rating).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", surname='").append(surname).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", avatar=").append(Arrays.toString(avatar));
+        sb.append(", about='").append(about).append('\'');
+        sb.append(", ratingDouble=").append(ratingDouble);
+        sb.append('}');
+        return sb.toString();
     }
 
     public static class Builder {
